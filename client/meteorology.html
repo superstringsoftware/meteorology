@@ -70,24 +70,3 @@
     </div>
 </template>
 
-<template name="showPost">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                {{#with post}}
-                <h2>{{title}}</h2>
-                    {{#each body}}
-                        {{#with format}}
-                        {{#markdown}}
-                        {{{markdownContent}}
-                        {{/markdown}}
-                        {{{html}}}
-                        {{/with}}
-                    {{/each}}
-                 {{/with}}
-
-            </div>
-        </div>
-    </div>
-
-</template>

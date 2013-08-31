@@ -1,10 +1,10 @@
 tl = TLog.getLogger()
 @Posts = new Meteor.Collection 'posts'
+@allowAdmin = (uid)-> if Meteor.users.findOne(uid)?.securityProfile?.globalRole is "admin" then true else false
 
 if Meteor.isServer
   au = Meteor.users.find({"securityProfile.globalRole": "admin"}).count()
 
-  @allowAdmin = (uid)-> if Meteor.users.findOne(uid).securityProfile.globalRole is "admin" then true else false
   Posts.allow
     insert: allowAdmin
     update: allowAdmin
@@ -35,6 +35,13 @@ if Meteor.isServer
   Meteor.publish 'allPosts',->
     tl.debug "Publishing All Posts for user #{@userId}"
     Posts.find()
+
+  # publishing roles
+  Meteor.publish "userData", ->
+    tl.debug "Publishing user info for user #{@userId}"
+    Meteor.users.find {_id: @userId}, {fields: {securityProfile: 1}}
+
+
 
   # if no posts exist, add some.
   if Posts.find().count() is 0
@@ -97,3 +104,4 @@ if Meteor.isClient
     loadingTemplate: "loading"
 
   CommonController.subscribe 'allPosts'
+  CommonController.subscribe 'userData'

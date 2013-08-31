@@ -3,8 +3,9 @@ Router.map ->
   @route 'about'
   @route "posts"
   @route "showPost",
-    path: "/posts/:_id"
-    data: -> post: Posts.findOne @params._id
+    path: "/posts/:_id",
+    controller: PostController
+
 
 
 
