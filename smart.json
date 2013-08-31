@@ -1,0 +1,9 @@
+{
+  "packages": {
+    "iron-router": {},
+    "observatory": {
+      "path": "../observatory"
+    },
+    "accounts-ui-bootstrap-3": {}
+  }
+}

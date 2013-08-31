@@ -7,3 +7,10 @@ standard-app-packages
 preserve-inputs
 coffeescript
 jquery
+iron-router
+observatory
+observatory-apollo
+accounts-github
+accounts-ui-bootstrap-3
+spiderable
+showdown

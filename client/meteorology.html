@@ -8,10 +8,10 @@
 
 
 <body>
-  {{> hello}}
+
 </body>
 
-<template name="hello">
+<template name="layout">
 
 
     <div class="navbar navbar-default">
@@ -24,92 +24,70 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="#">Home</a>
+                    <li>
+                        <a href="{{pathFor 'main'}}">Home</a>
                     </li>
                     <li>
-                        <a href="#">About</a>
+                        <a href="{{pathFor 'about'}}">About</a>
+                    </li>
+                    <li>
+                        <a href="{{pathFor 'posts'}}">Posts</a>
                     </li>
                 </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li style="margin-top: 10px;">{{ loginButtons }}</li>
+                </ul>
             </div>
+
         </div>
     </div>
 
-
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-1">
-                <h2>Featured post</h2>
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sodales, augue ut sodales pellentesque, erat est placerat diam, id hendrerit odio urna a nunc. Ut nec nunc quis sapien viverra dictum. Integer lacinia sollicitudin lacinia. Nullam fermentum magna in magna tincidunt, ut consequat mauris placerat. Pellentesque quis ultricies velit. Donec vitae varius odio.</p>
-                <p class="pull-right"><a href="#">read more</a></p>
-            </div>
-            <div class="col-md-4 col-md-offset-1">
-                <h2>Code snippets</h2>
-                <p>Some cool stuff goes here<img src="https://app.divshot.com/img/placeholder-100x100.gif"></p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-2 col-md-offset-1">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <h4>Resources</h4>
-                    </li>
-                    <li class="list-group-item">Meteor.com</li>
-                    <li class="list-group-item">Meteorology.io</li>
-                </ul>
-            </div>
-            <div class="col-md-2">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <h4>Apps</h4>
-                    </li>
-                    <li class="list-group-item">Meteor.com</li>
-                    <li class="list-group-item">Meteorology.io</li>
-                </ul>
-            </div>
-            <div class="col-md-2">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <h4>Apps</h4>
-                    </li>
-                    <li class="list-group-item">Meteor.com</li>
-                    <li class="list-group-item">Meteorology.io</li>
-                </ul>
-            </div>
-            <div class="col-md-2">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <h4>Packages</h4>
-                    </li>
-                    <li class="list-group-item">Meteor.com</li>
-                    <li class="list-group-item">Meteorology.io</li>
-                </ul>
-            </div>
-            <div class="col-md-2">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <h4>Discussions</h4>
-                    </li>
-                    <li class="list-group-item">Meteor.com</li>
-                    <li class="list-group-item">Meteorology.io</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <h3>New blog post</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sodales, augue ut sodales pellentesque, erat est placerat diam, id hendrerit odio urna a nunc. Ut nec nunc quis sapien viverra dictum. Integer lacinia sollicitudin lacinia. Nullam fermentum magna in magna tincidunt, ut consequat mauris placerat. Pellentesque quis ultricies velit. Donec vitae varius odio.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sodales, augue ut sodales pellentesque, erat est placerat diam, id hendrerit odio urna a nunc. Ut nec nunc quis sapien viverra dictum. Integer lacinia sollicitudin lacinia. Nullam fermentum magna in magna tincidunt, ut consequat mauris placerat. Pellentesque quis ultricies velit. Donec vitae varius odio.</p>
-            </div>
-        </div>
-    </div>
+    {{yield}}
 
     <div class="navbar navbar-fixed-bottom">
         <footer class="text-center clearfix">(c) 2013 Superstring Software Ventures</footer>
     </div>
+</template>
+
+<template name="about">
+    <h1>About</h1>
+</template>
+
+
+<template name="posts">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                {{#each posts}}
+                <a href="{{pathFor 'showPost'}}">
+                    <h3> {{title}}</h3>
+                </a>
+                {{tagline}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="showPost">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                {{#with post}}
+                <h2>{{title}}</h2>
+                    {{#each body}}
+                        {{#with format}}
+                        {{#markdown}}
+                        {{{markdownContent}}
+                        {{/markdown}}
+                        {{{html}}}
+                        {{/with}}
+                    {{/each}}
+                 {{/with}}
+
+            </div>
+        </div>
+    </div>
+
 </template>
