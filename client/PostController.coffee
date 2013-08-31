@@ -6,12 +6,16 @@ class @PostController extends RouteController
   waitOn: CommonController.getSubscription 'allPosts'
 
   data: ->
+    return {} unless CommonController.getSubscription('allPosts').ready()
+    tl.debug "data() called and subscription is #{CommonController.getSubscription('allPosts').ready()}", 'PostController'
+    console.log @params
     post = Posts.findOne @params._id
     # hack because meteor does not support @index in handlebars
-    return unless post?
     b.numInPost = i for b,i in post.body
-    #console.dir post
     post: post
+
+  loadingTemplate: 'loading',
+  notFoundTemplate: 'notFound'
 
 
 class @PostsController extends RouteController
@@ -25,26 +29,33 @@ class @PostsController extends RouteController
     tl.debug 'data() called', 'PostsController'
     posts: Posts.find()
 
+  loadingTemplate: 'loading',
+  notFoundTemplate: 'notFound'
+
 
 Template.showPost.rendered = ->
   #@myCodeMirror = null
-  doc = document.getElementById("lb_code_console")
-  if (not @myCodeMirror?) and (doc?)
-    @myCodeMirror = CodeMirror.fromTextArea doc,
-      mode:  "coffeescript"
-      theme: "solarized" #"ambiance" #
-      readOnly: true
+  for b in @data.post.body
+    doc = document.getElementById("codeParagraph#{b.numInPost}")
+    if doc?
+      CodeMirror.fromTextArea doc,
+        mode: b.type
+        theme: "solarized" #"ambiance" #
+        readOnly: true
 
 
 Template.showPost.helpers
-  canEdit: -> true
+
   # here we take one paragraph from the post body and format it properly
   format: ->
-    console.dir this
+    #console.log this
+    n = @numInPost
     switch @type
       when "markdown" then markdown = @content
       when "html", "text" then html = "#{@content}"
-      else html = "<textarea id='lb_code_console'>#{@content}</textarea>"
+      else
+        # setting up for codemirror & syntax highlighting for processing in the rendered callback
+        html = "<textarea id='codeParagraph#{n}'>#{@content}</textarea>"
     markdownContent: markdown, html: html
 
 Template.showPost.events
@@ -69,5 +80,10 @@ Template.showPost.events
     n = $(evt.target).attr 'data-num'
     console.log "Save changes clicked for #{n}"
     content = tmpl.cm.doc.getValue()
+    post = tmpl.data.post
+    post.body[n].content = content
+    $("#myModal#{n}").modal 'hide'
+    Posts.update post._id, $set: body: post.body
+
 
 
