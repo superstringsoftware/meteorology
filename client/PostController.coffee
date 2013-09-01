@@ -52,7 +52,7 @@ Template.showPost.helpers
     n = @numInPost
     switch @type
       when "markdown" then markdown = @content
-      when "html", "text" then html = "#{@content}"
+      when "html", "text", "htmlmixed" then html = "#{@content}"
       else
         # setting up for codemirror & syntax highlighting for processing in the rendered callback
         html = "<textarea id='codeParagraph#{n}'>#{@content}</textarea>"

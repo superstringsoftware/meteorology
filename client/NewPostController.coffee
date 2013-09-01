@@ -13,7 +13,7 @@ class @NewPostController extends RouteController
       categories: []
       tags: []
       body: [
-        content: 'ttt'
+        content: ''
         type: 'htmlmixed'
         numInPost: 0
         editing: true
@@ -25,6 +25,15 @@ class @NewPostController extends RouteController
   run: ->
     tl.debug "run() called", 'NewPostController'
     super
+
+  @savePost: (post)->
+    tl.debug 'Saving post', 'NewPostController'
+    p = @trimPost post
+    p.createdAt = new Date
+    p.permalink = "/" + p.createdAt.getFullYear() + "/" + (p.createdAt.getMonth() + 1) + "/" + p.createdAt.getDate() + "/" + p.title.replace(/\s/g, "_")
+    console.dir p
+    Posts.insert p
+
 
   # if save is true will save changes
   @processPostInMemory: (tmpl, save = false)->
@@ -44,7 +53,7 @@ class @NewPostController extends RouteController
 
   # removes paragraphs with empty content from the post - usable before saving to collection
   @trimPost: (post)->
-    console.log post
+    #console.log post
     body = []
     for p in post.body
       body.push p unless p.content.trim() is ''
@@ -66,7 +75,11 @@ Template.newPost.rendered = ->
         readOnly: not b.editing
       if b.editing
         @cm = CodeMirror.fromTextArea doc, options if not cm?
-      else CodeMirror.fromTextArea doc, options
+      else
+        cm1 = CodeMirror.fromTextArea doc, options
+        lc = cm1.doc.lineCount()
+        lc = 20 if lc > 20
+        cm1.setSize(null, 20*lc)
 
 
 Template.newPost.helpers
@@ -89,6 +102,13 @@ Template.newPost.helpers
 
 
 Template.newPost.events
+  # changing the mode of the editor
+  'change #codemirrorType': (evt, tmpl)->
+    type = $("#codemirrorType").val()
+    #console.log type
+    tmpl.cm.setOption("mode", type)
+
+  # adding a new paragraph
   'click #lnkNew': (evt, tmpl)->
     post = tmpl.data.post
     b.editing = false for b in post.body
@@ -103,5 +123,18 @@ Template.newPost.events
 
   'click #btnCancel': (evt, tmpl)-> NewPostController.processPostInMemory tmpl
   'click #btnSaveChanges': (evt, tmpl)-> NewPostController.processPostInMemory tmpl, true
+
+  # saving post to the database
+  # validation is done here - just checking for title now
+  'click #lnkPublish': (evt, tmpl)->
+    p = tmpl.data.post
+    p.title = $('#title').val()
+    p.tagline = $('#tagline').val()
+    p.credit = $('#credit').val()
+    p.link = $('#link').val()
+    #console.log p
+    return if p.title.trim() is ''
+    NewPostController.savePost p
+
 
 

@@ -92,7 +92,7 @@ if Meteor.isServer
         title: postData.title
         tagline: postData.tagline
         body: postData.body
-        submitted: new Date
+        createdAt: new Date
 
 
 
