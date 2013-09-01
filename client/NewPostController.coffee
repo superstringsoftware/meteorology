@@ -28,15 +28,16 @@ class @NewPostController extends RouteController
 
   # if save is true will save changes
   @processPostInMemory: (tmpl, save = false)->
+    type = $("#codemirrorType").val()
+    tl.debug "processPostInMemory(): #{type}", 'NewPostController'
     content = tmpl.cm.doc.getValue()
     post = tmpl.data.post
     n = Session.get "editingParagraph"
     b.editing = false for b in post.body
     if save
       if content.trim() is '' and n isnt false
-        tl.debug 'deleting paragraph - got empty content', 'NewPostController'
         post.body = _.without post.body, post.body[n]
-      else post.body[n].content = content unless n is false
+      else post.body[n].content = content; post.body[n].type = type unless n is false
 
     Session.set "currentPost", @trimPost post
     Session.set "editingParagraph", false
@@ -75,16 +76,11 @@ Template.newPost.helpers
   format: ->
     #console.log this
     n = @numInPost
-    if @editing
-      html = """<h3>Edit paragraph:</h3>
-                <textarea id='codeParagraph#{n}' class='form-control'>#{@content}</textarea>
-                <div><button type="button" class="btn btn-primary" id='btnSaveChanges'>Save changes</button>
-                <button type="button" class="btn btn-default" id='btnCancel'>Cancel</button></div>
-             """
+    if @editing then html = @content
     else
       switch @type
         when "markdown" then markdown = @content
-        when "html", "text", "htmlmixed" then html = "#{@content}"
+        when "html", "text", "htmlmixed" then html = @content
         else
         # setting up for codemirror & syntax highlighting for processing in the rendered callback
           html = "<textarea id='codeParagraph#{n}'>#{@content}</textarea>"

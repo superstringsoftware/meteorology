@@ -106,4 +106,6 @@ if Meteor.isClient
   CommonController.subscribe 'allPosts'
   CommonController.subscribe 'userData'
 
-  Session.set 'codemirrorTypes', ['htmlmixed','markdown','javascript','coffescript','css','xml']
+  Session.set 'codemirrorTypes', ['htmlmixed','markdown','javascript','coffeescript','css','xml']
+
+  Handlebars.registerHelper "getSession", (name)-> Session.get name

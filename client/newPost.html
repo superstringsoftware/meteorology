@@ -2,34 +2,51 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
+                <h1>New Post</h1>
                 {{#with post}}
                 <div class="form-group">
-                    <h2>Enter title:</h2>
-                    <input type="text" class="form-control" id="title">
+                    <input type="text" class="form-control" id="title" placeholder="Enter Title">
                 </div>
                 <div class="form-group">
-                    <h3>Enter tagline:</h3>
-                    <input type="text" class="form-control" id="tagline">
+                    <input type="text" class="form-control" id="tagline" placeholder="Enter tagline...">
                 </div>
 
-                    {{#each body}}
-                <div class="form-group">
-                    <p class="postParagraph" data-num="{{numInPost}}">
-                    {{#with format}}
-                        {{#markdown}}
-                            {{{markdownContent}}
-                        {{/markdown}}
-                        {{{html}}}
-                    {{/with}}
-                    </p>
-                </div>
+                {{#each body}}
 
+
+                {{#if editing}}
+                <p>
+                <select id="codemirrorType">
+                    {{#each getSession "codemirrorTypes"}}
+                    <option>{{this}}</option>
                     {{/each}}
+                </select>
+                </p>
+                <div class="form-group">
+                    <textarea id='codeParagraph{{numInPost}}' class='form-control'>{{format.html}}</textarea>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary btn-sm" id='btnSaveChanges'>Save changes</button>
+                    <button type="button" class="btn btn-default btn-sm" id='btnCancel'>Cancel</button>
+                </div>
+                {{else}}
+                <p class="postParagraph" data-num="{{numInPost}}">
+                {{#with format}}
+                    {{#markdown}}
+                        {{{markdownContent}}
+                    {{/markdown}}
+                    {{{html}}}
+                {{/with}}
+                </p>
+                {{/if}}
+
+
+
+                {{/each}}
                 </div>
                 <p><a href="#" id="lnkNew">New paragraph</a></p>
                 {{/with}}
 
-            </div>
         </div>
     </div>
 
