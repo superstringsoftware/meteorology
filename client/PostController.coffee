@@ -27,7 +27,7 @@ class @PostsController extends RouteController
 
   data: ->
     tl.debug 'data() called', 'PostsController'
-    posts: Posts.find()
+    posts: Posts.find {}
 
   loadingTemplate: 'loading',
   notFoundTemplate: 'notFound'

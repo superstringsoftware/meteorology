@@ -10,7 +10,6 @@ if Meteor.isServer
     update: allowAdmin
     remove: allowAdmin
 
-
   tl.info "Found " + au + " admin users"
   # accounts setup for initial admin user
   # removal rights on the logs
@@ -34,14 +33,12 @@ if Meteor.isServer
   # Publishing
   Meteor.publish 'allPosts',->
     tl.debug "Publishing All Posts for user #{@userId}"
-    Posts.find()
+    Posts.find {}, {sort: {createdAt: -1}}
 
   # publishing roles
   Meteor.publish "userData", ->
     tl.debug "Publishing user info for user #{@userId}"
     Meteor.users.find {_id: @userId}, {fields: {securityProfile: 1}}
-
-
 
   # if no posts exist, add some.
   if Posts.find().count() is 0

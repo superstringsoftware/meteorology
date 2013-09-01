@@ -64,6 +64,10 @@
                     <h3> {{title}}</h3>
                 </a>
                 {{tagline}}
+                <p>
+                    {{{body.0.content}}}
+                </p>
+                <a href="{{pathFor 'showPost'}}">Read the whole post</a>
                 {{/each}}
             </div>
         </div>
