@@ -105,3 +105,5 @@ if Meteor.isClient
 
   CommonController.subscribe 'allPosts'
   CommonController.subscribe 'userData'
+
+  Session.set 'codemirrorTypes', ['htmlmixed','markdown','javascript','coffescript','css','xml']

@@ -14,43 +14,98 @@ class @NewPostController extends RouteController
       tags: []
       body: [
         content: 'ttt'
-        type: 'text'
+        type: 'htmlmixed'
         numInPost: 0
         editing: true
       ]
+    Session.set "currentPost", post
+    Session.set "editingParagraph", 0
     post: post
 
   run: ->
     tl.debug "run() called", 'NewPostController'
     super
 
+  # if save is true will save changes
+  @processPostInMemory: (tmpl, save = false)->
+    content = tmpl.cm.doc.getValue()
+    post = tmpl.data.post
+    n = Session.get "editingParagraph"
+    b.editing = false for b in post.body
+    if save
+      if content.trim() is '' and n isnt false
+        tl.debug 'deleting paragraph - got empty content', 'NewPostController'
+        post.body = _.without post.body, post.body[n]
+      else post.body[n].content = content unless n is false
+
+    Session.set "currentPost", @trimPost post
+    Session.set "editingParagraph", false
+
+  # removes paragraphs with empty content from the post - usable before saving to collection
+  @trimPost: (post)->
+    console.log post
+    body = []
+    for p in post.body
+      body.push p unless p.content.trim() is ''
+    post.body = body
+    post
+
+
+
 
 Template.newPost.rendered = ->
+  tl.debug "rendered() called", 'NewPostController'
   #@myCodeMirror = null
   for b in @data.post.body
     doc = document.getElementById("codeParagraph#{b.numInPost}")
     if doc?
-      cm = CodeMirror.fromTextArea doc,
+      options =
         mode: b.type
         theme: "solarized" #"ambiance" #
         readOnly: not b.editing
-      @cm = cm if b.editing
-
+      if b.editing
+        @cm = CodeMirror.fromTextArea doc, options if not cm?
+      else CodeMirror.fromTextArea doc, options
 
 
 Template.newPost.helpers
-# here we take one paragraph from the post body and format it properly
+  post: -> Session.get "currentPost"
+
+  # here we take one paragraph from the post body and format it properly
   format: ->
     #console.log this
     n = @numInPost
-    if @editing then html = "<h3>Edit paragraph:</h3><textarea id='codeParagraph#{n}' class='form-control'>#{@content}</textarea>"
+    if @editing
+      html = """<h3>Edit paragraph:</h3>
+                <textarea id='codeParagraph#{n}' class='form-control'>#{@content}</textarea>
+                <div><button type="button" class="btn btn-primary" id='btnSaveChanges'>Save changes</button>
+                <button type="button" class="btn btn-default" id='btnCancel'>Cancel</button></div>
+             """
     else
       switch @type
         when "markdown" then markdown = @content
-        when "html", "text" then html = "#{@content}"
+        when "html", "text", "htmlmixed" then html = "#{@content}"
         else
         # setting up for codemirror & syntax highlighting for processing in the rendered callback
           html = "<textarea id='codeParagraph#{n}'>#{@content}</textarea>"
     markdownContent: markdown, html: html
+
+
+
+Template.newPost.events
+  'click #lnkNew': (evt, tmpl)->
+    post = tmpl.data.post
+    b.editing = false for b in post.body
+    len = post.body.length
+    post.body.push
+      content: ''
+      type: 'htmlmixed'
+      numInPost: len
+      editing: true
+    Session.set "currentPost", post
+    Session.set "editingParagraph", len
+
+  'click #btnCancel': (evt, tmpl)-> NewPostController.processPostInMemory tmpl
+  'click #btnSaveChanges': (evt, tmpl)-> NewPostController.processPostInMemory tmpl, true
 
 
