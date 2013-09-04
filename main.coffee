@@ -46,21 +46,11 @@ if Meteor.isServer
     posts = [
       title: "Meteor Source Maps have arrived!"
       tagline: "...and you will love it"
-      body: [
-        content: "You can now map to your CoffeScript source files from the browser."
-        type: "text"
-      ,
-        content: "Aint't it cool?"
-        type: "text"
-      ]
+      body: "You can now map to your CoffeScript source files from the browser."
     ,
       title: "Bootstrap 3 Goes Mobile First!"
       tagline: "testing preformatted text"
-      body: [
-        content: "With Bootstrap 3, <p>mobile devices</p> will load <i>only</i> necessary Styles and Content."
-        type: "html"
-      ,
-        content: """
+      body: """
                  Some preformatted markdown!
                  ---------------------------
 
@@ -68,18 +58,7 @@ if Meteor.isServer
                   * one
                   * two
                   * three
-                 """
-        type: "markdown"
-      ,
-        content: """
-                 class Horse extends Animal
-                 constructor: ->
-                   @name = 'Sunny'
-                   super
-                 """
-        type: "coffeescript"
-      ]
-
+            """
     ]
 
 
@@ -90,9 +69,6 @@ if Meteor.isServer
         tagline: postData.tagline
         body: postData.body
         createdAt: new Date
-
-
-
 
 
 if Meteor.isClient
@@ -106,8 +82,6 @@ if Meteor.isClient
 
   CommonController.subscribe 'allPosts'
   CommonController.subscribe 'userData'
-
-  Session.set 'codemirrorTypes', ['htmlmixed','markdown','javascript','coffeescript','css','xml']
 
   Handlebars.registerHelper "getSession", (name)-> Session.get name
   Handlebars.registerHelper "formatDate", (timestamp)-> timestamp?.toDateString()

@@ -1,8 +1,6 @@
 tl = TLog.getLogger()
-
-class @NewPostController extends RouteController
+class @_newPost extends RouteController
   template: "newPost"
-  layout: 'layout1'
 
   onBeforeRun: ->
 

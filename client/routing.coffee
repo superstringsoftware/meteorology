@@ -1,6 +1,5 @@
 Router.map ->
-  @route 'main', path: '/', controller: MainPageController
-  @route 'about'
+  @route 'main', path: '/'
   @route "posts"
   @route "showPost",
     path: "/posts/:_id",
@@ -10,9 +9,12 @@ Router.map ->
     path: "/posts/:year/:month/:day/:name",
     controller: PostController
 
+  ###
   @route "newPost",
     controller: NewPostController,
     action: 'runWithCheck'
+
+  ###
 
 
 

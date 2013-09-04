@@ -2,54 +2,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                {{#with post}}
-                <h2>{{title}}</h2>
-                <h4>{{tagline}}</h4>
-                <h5>
-                    {{formatDate createdAt}}
-                    {{#if credit}} | <em>credit for the original post: <a href="{{link}}">{{credit}}</a></em>{{/if}}
-                </h5>
-                {{#each body}}
-                <p class="postParagraph" data-num="{{numInPost}}">
-                {{#with format}}
-                    {{#markdown}}
-                        {{{markdownContent}}
-                    {{/markdown}}
-                    {{{html}}}
-                {{/with}}
-                </p>
-
-                <div class="modal fade" id="myModal{{numInPost}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">Edit paragraph</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                <textarea id="realEditorArea{{numInPost}}" class="form-control">
-                                {{content}}
-                                </textarea>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary btnSaveChanges" data-num="{{numInPost}}">Save changes</button>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                </div><!-- /.modal -->
-
-                {{/each}}
-                {{/with}}
-
+                {{> _post }}
             </div>
         </div>
     </div>
 
 </template>
 
+
+<template name="newPost">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                {{> _newPost }}
+            </div>
+        </div>
+    </div>
+
+</template>
 
 
 
