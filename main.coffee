@@ -94,11 +94,15 @@ if Meteor.isServer
 
 
 
+
 if Meteor.isClient
   Router.configure
     layout: "layout"
     notFoundTemplate: "notFound"
     loadingTemplate: "loading"
+
+  Observatory.logCollection()
+  #Observatory.logTemplates()
 
   CommonController.subscribe 'allPosts'
   CommonController.subscribe 'userData'
@@ -106,3 +110,7 @@ if Meteor.isClient
   Session.set 'codemirrorTypes', ['htmlmixed','markdown','javascript','coffeescript','css','xml']
 
   Handlebars.registerHelper "getSession", (name)-> Session.get name
+  Handlebars.registerHelper "formatDate", (timestamp)-> timestamp?.toDateString()
+
+
+

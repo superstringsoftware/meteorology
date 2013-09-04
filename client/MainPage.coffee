@@ -13,7 +13,7 @@ class @MainPageController extends RouteController
     ret
 
   run: ->
-    console.log 'running'
+    #console.log 'running'
     super
 
 Template.main.created = ->

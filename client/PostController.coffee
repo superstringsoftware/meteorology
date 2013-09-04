@@ -8,10 +8,12 @@ class @PostController extends RouteController
   data: ->
     return {} unless CommonController.getSubscription('allPosts').ready()
     tl.debug "data() called and subscription is #{CommonController.getSubscription('allPosts').ready()}", 'PostController'
-    console.log @params
+    #console.log @params
     post = Posts.findOne @params._id
     # hack because meteor does not support @index in handlebars
-    b.numInPost = i for b,i in post.body
+    for b,i in post.body
+      b.numInPost = i
+      b.editing = false
     post: post
 
   loadingTemplate: 'loading',
@@ -35,13 +37,17 @@ class @PostsController extends RouteController
 
 Template.showPost.rendered = ->
   #@myCodeMirror = null
+  return unless @data.post?.body?
   for b in @data.post.body
     doc = document.getElementById("codeParagraph#{b.numInPost}")
     if doc?
-      CodeMirror.fromTextArea doc,
+      cm1 = CodeMirror.fromTextArea doc,
         mode: b.type
         theme: "solarized" #"ambiance" #
         readOnly: true
+      lc = cm1.doc.lineCount()
+      lc = 20 if lc > 20
+      cm1.setSize(null, 20*lc + 20)
 
 
 Template.showPost.helpers

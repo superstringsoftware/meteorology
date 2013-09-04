@@ -2,25 +2,51 @@ tl = TLog.getLogger()
 
 class @NewPostController extends RouteController
   template: "newPost"
+  layout: 'layout1'
+
+  onBeforeRun: ->
+
+  waitOn: ->
+    tl.debug "Waiting on subscription..."
+    CommonController.getSubscription 'userData'
+
+  runWithCheck: ->
+    #t = allowAdmin(Meteor.userId())
+    s = CommonController.getSubscription 'userData'
+    tl.debug "runWithCheck called with for " + s.ready()
+    #console.dir Meteor.user()
+    #@redirect('/') unless allowAdmin(Meteor.userId())
+    @render()
 
   data: ->
-    tl.debug "data() called - preparing empty post stub", 'NewPostController'
-    post =
-      title: ''
-      tagline: ''
-      credit: ''
-      link: ''
-      categories: []
-      tags: []
-      body: [
-        content: ''
-        type: 'htmlmixed'
-        numInPost: 0
-        editing: true
-      ]
+    tl.debug "data() called with params", 'NewPostController'
+    console.log @params
+    data =
+      title: 'New Post'
+    if @params.id?
+      post = Posts.findOne @params.id
+      b.editing = false for b in post.body
+      data.title = 'Edit Post'
+      Session.set "editingParagraph", false
+    else
+      post =
+        title: ''
+        tagline: ''
+        credit: ''
+        link: ''
+        categories: []
+        tags: []
+        body: [
+          content: ''
+          type: 'htmlmixed'
+          numInPost: 0
+          editing: true
+        ]
+      Session.set "editingParagraph", 0
+
     Session.set "currentPost", post
-    Session.set "editingParagraph", 0
-    post: post
+    data.post = post
+    data
 
   run: ->
     tl.debug "run() called", 'NewPostController'
@@ -29,10 +55,25 @@ class @NewPostController extends RouteController
   @savePost: (post)->
     tl.debug 'Saving post', 'NewPostController'
     p = @trimPost post
-    p.createdAt = new Date
-    p.permalink = "/" + p.createdAt.getFullYear() + "/" + (p.createdAt.getMonth() + 1) + "/" + p.createdAt.getDate() + "/" + p.title.replace(/\s/g, "_")
-    console.dir p
-    Posts.insert p
+    if p._id?
+      Posts.update p._id,
+        $set:
+          title: p.title
+          tagline: p.tagline
+          credit: p.credit
+          link: p.link
+          categories: p.categories
+          tags: p.tags
+          body: p.body
+          updatedAt: new Date
+          updatedBy: Meteor.userId()
+    else
+      p.createdAt = new Date
+      p.createdBy = Meteor.userId()
+      p.permalink = "/" + p.createdAt.getFullYear() + "/" + (p.createdAt.getMonth() + 1) + "/" + p.createdAt.getDate() + "/" + p.title.replace(/\s/g, "_")
+      Posts.insert p
+    #console.dir p
+
 
 
   # if save is true will save changes
@@ -64,7 +105,9 @@ class @NewPostController extends RouteController
 
 
 Template.newPost.rendered = ->
-  tl.debug "rendered() called", 'NewPostController'
+  tl.debug "rendered() called", 'Template.newPost'
+  console.log this
+  #console.dir @data
   #@myCodeMirror = null
   for b in @data.post.body
     doc = document.getElementById("codeParagraph#{b.numInPost}")
@@ -127,6 +170,7 @@ Template.newPost.events
   # saving post to the database
   # validation is done here - just checking for title now
   'click #lnkPublish': (evt, tmpl)->
+    return unless allowAdmin(Meteor.userId())
     p = tmpl.data.post
     p.title = $('#title').val()
     p.tagline = $('#tagline').val()

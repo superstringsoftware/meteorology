@@ -4,8 +4,12 @@
             <div class="col-md-10 col-md-offset-1">
                 {{#with post}}
                 <h2>{{title}}</h2>
+                <h4>{{tagline}}</h4>
+                <h5>
+                    {{formatDate createdAt}}
+                    {{#if credit}} | <em>credit for the original post: <a href="{{link}}">{{credit}}</a></em>{{/if}}
+                </h5>
                 {{#each body}}
-
                 <p class="postParagraph" data-num="{{numInPost}}">
                 {{#with format}}
                     {{#markdown}}

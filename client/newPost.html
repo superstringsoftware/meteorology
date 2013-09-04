@@ -2,20 +2,20 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <h1>New Post</h1>
+                <h1>{{title}}</h1>
                 {{#with post}}
                 <div class="form-group">
-                    <input type="text" class="form-control" id="title" placeholder="Enter Title">
+                    <input type="text" class="form-control" id="title" placeholder="Enter Title" value="{{title}}">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="tagline" placeholder="Enter tagline...">
+                    <input type="text" class="form-control" id="tagline" placeholder="Enter tagline..." value="{{tagline}}">
                 </div>
                 <div class="form-inline">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="link" placeholder="Link if applicable">
+                        <input type="text" class="form-control" id="link" placeholder="Link if applicable" value="{{link}}">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="credit" placeholder="Credits to">
+                        <input type="text" class="form-control" id="credit" placeholder="Credits to" value="{{credit}}">
                     </div>
                 </div>
 
