@@ -6,15 +6,19 @@ Router.map ->
     controller: PostController
 
   @route "test",
-    path: "/posts/:year/:month/:day/:name",
+    path: "/posts/:year/:month/:day/:slug",
     controller: PostController
 
-  ###
+
   @route "newPost",
     controller: NewPostController,
     action: 'runWithCheck'
+  @route "editPost",
+    path: '/editPost/:_id',
+    controller: NewPostController,
+    action: 'runWithCheck'
 
-  ###
+
 
 
 

@@ -3,7 +3,7 @@
     <h2>{{title}}</h2>
     <h4>{{tagline}}</h4>
     <h5>
-        {{formatDate createdAt}}
+        {{formatDate createdAt.timestamp}}
         {{#if credit}} | <em>credit for the original post: <a href="{{link}}">{{credit}}</a></em>{{/if}}
     </h5>
     <p>

@@ -33,7 +33,7 @@ if Meteor.isServer
   # Publishing
   Meteor.publish 'allPosts',->
     tl.debug "Publishing All Posts for user #{@userId}"
-    Posts.find {}, {sort: {createdAt: -1}}
+    Posts.find {}, sort: 'createdAt.timestamp': -1
 
   # publishing roles
   Meteor.publish "userData", ->
