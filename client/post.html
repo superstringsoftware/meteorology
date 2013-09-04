@@ -18,9 +18,30 @@
             </div>
         </div>
     </div>
-
 </template>
 
 
 
+<template name="posts">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                {{#each posts}}
+                <a href="{{pathFor 'showPost'}}">
+                    <h3> {{title}}</h3>
+                </a>
+                <h5>
+                    {{formatDate createdAt}}
+                    {{#if credit}} | <em>credit for the original post: <a href="{{link}}">{{credit}}</a></em>{{/if}}
+                </h5>
+                {{tagline}}
+                <p>
+                    {{{body.0.content}}}
+                </p>
+                <a href="{{pathFor 'showPost'}}">Read the whole post</a>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</template>
 

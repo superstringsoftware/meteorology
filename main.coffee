@@ -77,7 +77,7 @@ if Meteor.isClient
     notFoundTemplate: "notFound"
     loadingTemplate: "loading"
 
-  Observatory.logCollection()
+  #Observatory.logCollection()
   #Observatory.logTemplates()
 
   CommonController.subscribe 'allPosts'

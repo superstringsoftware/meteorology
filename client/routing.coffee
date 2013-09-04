@@ -1,6 +1,6 @@
 Router.map ->
-  @route 'main', path: '/'
-  @route "posts"
+  #@route 'main', path: '/'
+  @route "posts", path: '/'
   @route "showPost",
     path: "/posts/:_id",
     controller: PostController

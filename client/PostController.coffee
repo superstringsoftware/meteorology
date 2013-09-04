@@ -8,13 +8,10 @@ class @PostController extends RouteController
   data: ->
     return {} unless CommonController.getSubscription('allPosts').ready()
     tl.debug "data() called and subscription is #{CommonController.getSubscription('allPosts').ready()}", 'PostController'
-    #console.log @params
+    console.log @params
     post = Posts.findOne @params._id
-    # hack because meteor does not support @index in handlebars
-    for b,i in post.body
-      b.numInPost = i
-      b.editing = false
-    post: post
+    console.log post
+    post
 
   loadingTemplate: 'loading',
   notFoundTemplate: 'notFound'
