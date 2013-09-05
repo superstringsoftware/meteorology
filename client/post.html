@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 {{#each posts}}
-                <a href="{{pathFor 'showPost'}}">
+                <a href="{{pathFor 'showPostPermalink' createdAt}}">
                     <h3> {{title}}</h3>
                 </a>
                 <h5>
@@ -38,7 +38,9 @@
                 <p>
                     {{{body.0.content}}}
                 </p>
-                <a href="{{pathFor 'showPost'}}">Read the whole post</a>
+                {{#isolate}}
+                <a href="http://meteorology.io{{pathFor 'showPostPermalink' createdAt}}#disqus_thread">Read the whole post</a>
+                {{/isolate}}
                 {{/each}}
             </div>
         </div>

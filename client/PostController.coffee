@@ -9,8 +9,14 @@ class @PostController extends RouteController
     return {} unless CommonController.getSubscription('allPosts').ready()
     tl.debug "data() called and subscription is #{CommonController.getSubscription('allPosts').ready()}", 'PostController'
     console.log @params
-    post = Posts.findOne @params._id
-    console.log post
+    if @params._id
+      post = Posts.findOne @params._id
+    else
+      post = Posts.findOne
+        slug: @params.slug
+        'createdAt.year': parseInt(@params.year, 10)
+        'createdAt.month': parseInt(@params.month, 10)
+        'createdAt.day': parseInt(@params.day, 10)
     post
 
   loadingTemplate: 'loading',
@@ -31,6 +37,25 @@ class @PostsController extends RouteController
   loadingTemplate: 'loading',
   notFoundTemplate: 'notFound'
 
+Template.posts.rendered = ->
+  Session.set("loadDisqus", true)
+
+  Deps.autorun ->
+    # Load the Disqus embed.js the first time the `disqus` template is rendered
+    # but never more than once
+    if Session.get("loadDisqus") && !window.DISQUSWIDGETS
+      # * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * *
+      disqus_shortname = "meteorology" # required: replace example with your forum shortname
+
+      # * * DON'T EDIT BELOW THIS LINE * *
+      (->
+        s = document.createElement("script")
+        #console.log 'attaching counts'
+        s.async = true
+        s.type = "text/javascript"
+        s.src = "//" + disqus_shortname + ".disqus.com/count.js"
+        (document.getElementsByTagName("HEAD")[0] or document.getElementsByTagName("BODY")[0]).appendChild s
+      )()
 
 Template.showPost.rendered = ->
   return unless @data.post?.body?

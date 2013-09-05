@@ -84,7 +84,8 @@ if Meteor.isClient
   CommonController.subscribe 'userData'
 
   Handlebars.registerHelper "getSession", (name)-> Session.get name
-  Handlebars.registerHelper "formatDate", (timestamp)-> timestamp?.toDateString()
+  Handlebars.registerHelper "formatDate", (timestamp)->
+    timestamp?.toDateString?()
 
 
 

@@ -5,7 +5,7 @@ Router.map ->
     path: "/posts/:_id",
     controller: PostController
 
-  @route "test",
+  @route "showPostPermalink",
     path: "/posts/:year/:month/:day/:slug",
     controller: PostController
 

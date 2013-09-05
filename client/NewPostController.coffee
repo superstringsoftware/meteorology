@@ -71,6 +71,7 @@ class @NewPostController extends RouteController
         year: ts.getFullYear()
         month: ts.getMonth() + 1
         day: ts.getDate()
+        slug: p.slug # ugly hack to make Router.pathFor work
       published: true
       p.createdBy = Meteor.userId()
       p._id = Posts.insert p
