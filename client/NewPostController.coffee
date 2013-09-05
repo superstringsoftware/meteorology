@@ -48,8 +48,21 @@ class @NewPostController extends RouteController
   @savePost: (post)->
     tl.debug 'Saving post', 'NewPostController'
     p = post
-    if p.slug.trim() is ''
-      p.slug = escape p.title
+    p.slug = escape p.title if p.slug.trim() is ''
+    cd = p.createdDateString.split('/')
+    console.log cd
+    # editing creation date
+    cdn = []
+    cdn.push parseInt(i,10) for i in cd
+    ts = if cd[0].trim is '' then new Date else new Date(cdn[0],cdn[1]-1,cdn[2])
+
+    p.createdAt =
+      timestamp: ts
+      year: ts.getFullYear()
+      month: ts.getMonth() + 1
+      day: ts.getDate()
+      slug: p.slug # ugly hack to make Router.pathFor work
+
     if p._id?
       Posts.update p._id,
         $set:
@@ -64,15 +77,9 @@ class @NewPostController extends RouteController
           slug: p.slug
           updatedAt: new Date
           updatedBy: Meteor.userId()
+          createdAt: p.createdAt
     else
-      ts = new Date
-      p.createdAt =
-        timestamp: ts
-        year: ts.getFullYear()
-        month: ts.getMonth() + 1
-        day: ts.getDate()
-        slug: p.slug # ugly hack to make Router.pathFor work
-      published: true
+      p.published = true
       p.createdBy = Meteor.userId()
       p._id = Posts.insert p
     console.dir p
@@ -100,7 +107,9 @@ Template.newPost.events
     p.body = $('#body').val()
     p.mainCategory = $('#category').val()
     p.slug = $('#slug').val()
-    console.log p
+    p.createdDateString = $('#createdDate').val()
+
+    #console.log p
     # TODO: add validation notifications
     return if (p.title.trim() is '') or (p.body.trim() is '')
     NewPostController.savePost p
