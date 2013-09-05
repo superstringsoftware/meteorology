@@ -50,11 +50,12 @@ class @NewPostController extends RouteController
     p = post
     p.slug = escape p.title if p.slug.trim() is ''
     cd = p.createdDateString.split('/')
-    console.log cd
+    #console.log p
     # editing creation date
     cdn = []
     cdn.push parseInt(i,10) for i in cd
-    ts = if cd[0].trim is '' then new Date else new Date(cdn[0],cdn[1]-1,cdn[2])
+    #console.log cd[0].trim
+    ts = if cd[0].trim() is '' then new Date() else new Date(cdn[0],cdn[1]-1,cdn[2])
 
     p.createdAt =
       timestamp: ts
@@ -93,6 +94,11 @@ Template.newPost.helpers
   post: -> Session.get "currentPost"
 
 Template.newPost.events
+  'click #lnkDelete': (e,tmpl) ->
+    p = tmpl.data.post
+    Posts.remove p._id
+    Router.go Router.path('posts')
+
   'click #lnkCancel': (evt, tmpl)-> Router.go Router.path('showPost', _id: tmpl.data.post._id)
 
   # saving post to the database
