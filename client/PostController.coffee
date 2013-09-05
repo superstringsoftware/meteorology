@@ -32,7 +32,7 @@ class @PostsController extends RouteController
 
   data: ->
     tl.debug 'data() called', 'PostsController'
-    posts: Posts.find {} #published: true
+    posts: Posts.find {}, sort: 'createdAt.timestamp': -1 #published: true
 
   loadingTemplate: 'loading',
   notFoundTemplate: 'notFound'

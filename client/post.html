@@ -34,13 +34,8 @@
                     {{formatDate createdAt.timestamp}}
                     {{#if credit}} | <em>credit for the original post: <a href="{{link}}">{{credit}}</a></em>{{/if}}
                 </h5>
-                {{tagline}}
-                <p>
-                    {{{body.0.content}}}
-                </p>
-                {{#isolate}}
-                <a href="http://meteorology.io{{pathFor 'showPostPermalink' createdAt}}#disqus_thread">Read the whole post</a>
-                {{/isolate}}
+                <h4>{{tagline}}</h4>
+                <a href="{{pathFor 'showPostPermalink' createdAt}}">Read the whole post</a>
                 {{/each}}
             </div>
         </div>
