@@ -24,6 +24,9 @@
       },
       "observatory-apollo": {
         "path": "../observatory-apollo"
+      },
+      "observatory-galileo": {
+        "path": "../observatory-galileo"
       }
     }
   }

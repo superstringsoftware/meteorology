@@ -1,12 +1,12 @@
 {
     "public": {
         "observatorySettings": {
-            "logLevel": "LOGLEVEL_INFO",
+            "logLevel": "INFO",
             "printToConsole": false,
             "logUser": true,
             "logHttp": true,
             "logDDP": false,
-            "prohibitAutoPublish": false
+            "prohibitAutoPublish": true
         }
     }
 }

@@ -8,8 +8,9 @@ preserve-inputs
 coffeescript
 jquery
 iron-router
-observatory
+observatory-galileo
 observatory-apollo
+observatory
 accounts-github
 accounts-ui-bootstrap-3
 spiderable
