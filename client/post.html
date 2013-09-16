@@ -3,6 +3,7 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1 post">
                 {{> _post }}
+                {{>disqus}}
             </div>
         </div>
     </div>
@@ -26,6 +27,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
+                {{#with lastPost}}
+                {{> _post }}
+                <a href="{{pathFor 'showPostPermalink' createdAt}}">discussion</a>
+                {{/with}}
+
+                <hr/>
+
                 {{#each posts}}
                 <a href="{{pathFor 'showPostPermalink' createdAt}}">
                     <h3> {{title}}</h3>

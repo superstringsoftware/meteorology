@@ -4,6 +4,8 @@ tl = TLog.getLogger()
 
 if Meteor.isServer
   au = Meteor.users.find({"securityProfile.globalRole": "admin"}).count()
+  Observatory.meteorServer.publish -> true
+  Observatory.emitters.Monitor.startMonitor(60000)
 
   Posts.allow
     insert: allowAdmin
@@ -13,7 +15,7 @@ if Meteor.isServer
   tl.info "Found " + au + " admin users"
   # accounts setup for initial admin user
   # removal rights on the logs
-  TLog.allowRemove allowAdmin
+  # TLog.allowRemove allowAdmin
   if au < 1
     tl.warn("No admin users found, creating default...")
     try
@@ -72,6 +74,8 @@ if Meteor.isServer
 
 
 if Meteor.isClient
+  Observatory.logMeteor()
+  
   Router.configure
     layout: "layout"
     notFoundTemplate: "notFound"
