@@ -28,7 +28,7 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li style="margin-top: 10px;">{{ loginButtons }}</li>
+                    <li style="margin-top: 10px;">{{> loginButtons }}</li>
                 </ul>
             </div>
 
@@ -37,7 +37,7 @@
 
     <div class="container">
         <div class="col-md-8">
-       {{yield}}
+       {{> yield}}
         </div>
         <div class="col-md-4">
             {{>_about}}

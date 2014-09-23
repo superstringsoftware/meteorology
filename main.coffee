@@ -77,7 +77,7 @@ if Meteor.isClient
   Observatory.logMeteor()
   
   Router.configure
-    layout: "layout"
+    layoutTemplate: "layout"
     notFoundTemplate: "notFound"
     loadingTemplate: "loading"
 
@@ -87,8 +87,8 @@ if Meteor.isClient
   CommonController.subscribe 'allPosts'
   CommonController.subscribe 'userData'
 
-  Handlebars.registerHelper "getSession", (name)-> Session.get name
-  Handlebars.registerHelper "formatDate", (timestamp)->
+  UI.registerHelper "getSession", (name)-> Session.get name
+  UI.registerHelper "formatDate", (timestamp)->
     timestamp?.toDateString?()
 
 

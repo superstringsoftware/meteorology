@@ -8,7 +8,7 @@ class @PostController extends RouteController
   data: ->
     return {} unless CommonController.getSubscription('allPosts').ready()
     tl.debug "data() called and subscription is #{CommonController.getSubscription('allPosts').ready()}", 'PostController'
-    #console.log @params
+    console.log @params
     if @params._id
       post = Posts.findOne @params._id
     else

@@ -10,6 +10,8 @@ accounts-github
 spiderable
 showdown
 iron:router
-mrt:accounts-ui-bootstrap-3
 superstringsoft:observatory-apollo
+accounts-base
+ian:accounts-ui-bootstrap-3
+accounts-password
 

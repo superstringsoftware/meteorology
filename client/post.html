@@ -29,21 +29,27 @@
             <div class="col-md-10 col-md-offset-1">
                 {{#with lastPost}}
                 {{> _post }}
-                <a href="{{pathFor 'showPostPermalink' createdAt}}">discussion</a>
+                {{#with createdAt}}
+                <a href="{{pathFor 'showPostPermalink'}}">discussion</a>
+                {{/with}}
                 {{/with}}
 
                 <hr/>
 
                 {{#each posts}}
-                <a href="{{pathFor 'showPostPermalink' createdAt}}">
-                    <h3> {{title}}</h3>
+                {{#with createdAt}}
+                <a href="{{pathFor 'showPostPermalink'}}">
+                <h3> {{../title}}</h3>
                 </a>
+                {{/with}}
                 <h5>
                     {{formatDate createdAt.timestamp}}
                     {{#if credit}} | <em>credit for the original post: <a href="{{link}}">{{credit}}</a></em>{{/if}}
                 </h5>
                 <h4>{{tagline}}</h4>
-                <a href="{{pathFor 'showPostPermalink' createdAt}}">Read the whole post</a>
+                {{#with createdAt}}
+                <a href="{{pathFor 'showPostPermalink'}}">Read the whole post</a>
+                {{/with}}
                 {{/each}}
             </div>
         </div>
