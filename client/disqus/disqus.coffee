@@ -25,7 +25,7 @@ Template.disqus.rendered = ->
     config: ->
   )
 
-  Deps.autorun(->
+  Tracker.autorun(->
     # Load the Disqus embed.js the first time the `disqus` template is rendered
     # but never more than once
     if Session.get("loadDisqus") && !window.DISQUS
@@ -36,7 +36,7 @@ Template.disqus.rendered = ->
 
     # * * DON'T EDIT BELOW THIS LINE * *
       (->
-        console.log "inside the main callback"
+        #console.log "inside the main callback"
         dsq = document.createElement("script")
         dsq.type = "text/javascript"
         dsq.async = true

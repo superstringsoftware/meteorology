@@ -3,6 +3,10 @@ tl = TLog.getLogger()
 @allowAdmin = (uid)-> if Meteor.users.findOne(uid)?.securityProfile?.globalRole is "admin" then true else false
 
 if Meteor.isServer
+
+  #console.dir Meteor.default_server?.stream_server?.open_sockets
+  #console.dir Meteor.server
+
   au = Meteor.users.find({"securityProfile.globalRole": "admin"}).count()
   Observatory.meteorServer.publish -> true
   Observatory.emitters.Monitor.startMonitor(60000)
@@ -72,8 +76,10 @@ if Meteor.isServer
         body: postData.body
         createdAt: new Date
 
+  #console.dir Meteor.server
 
 if Meteor.isClient
+  Observatory.subscribe(50)
   Observatory.logMeteor()
   
   Router.configure
