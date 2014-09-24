@@ -79,7 +79,7 @@ if Meteor.isServer
   #console.dir Meteor.server
 
 if Meteor.isClient
-  Observatory.subscribe(50)
+  #Observatory.subscribe(50)
   Observatory.logMeteor()
   
   Router.configure
