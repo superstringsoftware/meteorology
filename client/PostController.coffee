@@ -1,4 +1,4 @@
-tl = TLog.getLogger()
+tl = Observatory.getToolbox()
 
 class @PostController extends RouteController
   template: "showPost"

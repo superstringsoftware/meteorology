@@ -1,4 +1,4 @@
-tl = TLog.getLogger()
+tl = Observatory.getToolbox()
 @Posts = new Meteor.Collection 'posts'
 @allowAdmin = (uid)-> if Meteor.users.findOne(uid)?.securityProfile?.globalRole is "admin" then true else false
 
@@ -8,7 +8,7 @@ if Meteor.isServer
   #console.dir Meteor.server
 
   au = Meteor.users.find({"securityProfile.globalRole": "admin"}).count()
-  Observatory.meteorServer.publish -> true
+  #Observatory.meteorServer.publish -> true
   Observatory.emitters.Monitor.startMonitor(60000)
 
   Posts.allow
@@ -80,7 +80,7 @@ if Meteor.isServer
 
 if Meteor.isClient
   #Observatory.subscribe(50)
-  Observatory.logMeteor()
+  #Observatory.logMeteor()
   
   Router.configure
     layoutTemplate: "layout"
