@@ -88,6 +88,7 @@ if Meteor.isClient
     loadingTemplate: "loading"
 
   #Observatory.logCollection()
+  Observatory.logMeteor()
   #Observatory.logTemplates()
 
   CommonController.subscribe 'allPosts'
