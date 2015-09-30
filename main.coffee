@@ -9,7 +9,7 @@ if Meteor.isServer
 
   au = Meteor.users.find({"securityProfile.globalRole": "admin"}).count()
   #Observatory.meteorServer.publish -> true
-  Observatory.emitters.Monitor.startMonitor(60000)
+  Observatory.emitters.Monitor.startMonitor(300000)
 
   Posts.allow
     insert: allowAdmin
