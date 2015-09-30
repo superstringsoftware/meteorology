@@ -1,9 +1,13 @@
+Router.route 'posts', path: '/'
+Router.route "showPost",
+  path: "/posts/:_id",
+  controller: PostController
+
+
+
 Router.map ->
-  #@route 'main', path: '/'
-  @route "posts", path: '/'
-  @route "showPost",
-    path: "/posts/:_id",
-    controller: PostController
+
+
 
   @route "showPostPermalink",
     path: "/posts/:year/:month/:day/:slug",
