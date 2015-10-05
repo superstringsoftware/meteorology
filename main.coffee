@@ -27,12 +27,16 @@ if Meteor.isServer
         username: "admin"
         email: "jho.xray@gmail.com"
         password: "password"
-        securityProfile:
+        authProfile:
           globalRole: "admin"
         profile:
           firstName: "Jay"
           lastName: "Ho"
       tl.info("Admin user created with id: " + id)
+      Meteor.users.update id,
+        $set:
+          securityProfile:
+            globalRole: "admin"
     catch err
       tl.error("Admin account creation failed with error " + err.name + ", message: " + err.message + "<br/>\n" + err.stack)
 

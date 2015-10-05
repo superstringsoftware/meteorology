@@ -2,6 +2,12 @@ Router.route 'posts', path: '/'
 Router.route "showPost",
   path: "/posts/:_id",
   controller: PostController
+Router.route "newPost",
+  controller: NewPostController
+Router.route "editPost",
+  controller: NewPostController
+  path: '/editPost/:_id',
+
 
 
 
@@ -14,13 +20,6 @@ Router.map ->
     controller: PostController
 
 
-  @route "newPost",
-    controller: NewPostController,
-    action: 'runWithCheck'
-  @route "editPost",
-    path: '/editPost/:_id',
-    controller: NewPostController,
-    action: 'runWithCheck'
 
 
 

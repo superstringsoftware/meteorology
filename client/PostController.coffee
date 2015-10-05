@@ -6,6 +6,7 @@ class @PostController extends RouteController
   waitOn: CommonController.getSubscription 'allPosts'
 
   data: ->
+    console.log "Data in showPost called"
     return {} unless CommonController.getSubscription('allPosts').ready()
     tl.debug "data() called and subscription is #{CommonController.getSubscription('allPosts').ready()}", 'PostController'
     console.log @params

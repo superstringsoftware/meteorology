@@ -45,46 +45,7 @@ class @NewPostController extends RouteController
     tl.debug "run() called", 'NewPostController'
     super
 
-  @savePost: (post)->
-    tl.debug 'Saving post', 'NewPostController'
-    p = post
-    p.slug = escape p.title if p.slug.trim() is ''
-    cd = p.createdDateString.split('/')
-    #console.log p
-    # editing creation date
-    cdn = []
-    cdn.push parseInt(i,10) for i in cd
-    #console.log cd[0].trim
-    ts = if cd[0].trim() is '' then new Date() else new Date(cdn[0],cdn[1]-1,cdn[2])
 
-    p.createdAt =
-      timestamp: ts
-      year: ts.getFullYear()
-      month: ts.getMonth() + 1
-      day: ts.getDate()
-      slug: p.slug # ugly hack to make Router.pathFor work
-
-    if p._id?
-      Posts.update p._id,
-        $set:
-          title: p.title
-          tagline: p.tagline
-          credit: p.credit
-          link: p.link
-          categories: p.categories
-          mainCategory: p.mainCategory
-          tags: p.tags
-          body: p.body
-          slug: p.slug
-          updatedAt: new Date
-          updatedBy: Meteor.userId()
-          createdAt: p.createdAt
-    else
-      p.published = true
-      p.createdBy = Meteor.userId()
-      p._id = Posts.insert p
-    console.dir p
-    Router.go Router.path('showPost', _id: p._id)
 
 
 Template.newPost.rendered = ->
@@ -99,7 +60,10 @@ Template.newPost.events
     Posts.remove p._id
     Router.go Router.path('posts')
 
-  'click #lnkCancel': (evt, tmpl)-> Router.go Router.path('showPost', _id: tmpl.data.post._id)
+  'click #lnkCancel': (evt, tmpl)->
+    id = tmpl.data.post._id
+    console.log "clicked cancel", id
+    Router.go('showPost', {_id: tmpl.data.post._id})
 
   # saving post to the database
   # validation is done here - just checking for title now
@@ -118,7 +82,48 @@ Template.newPost.events
     #console.log p
     # TODO: add validation notifications
     return if (p.title.trim() is '') or (p.body.trim() is '')
-    NewPostController.savePost p
+    Template.newPost.savePost p
+    Router.go('showPost', {_id: p._id})
 
 
+Template.newPost.savePost = (post)->
+  tl.debug 'Saving post', 'NewPostController'
+  p = post
+  p.slug = escape p.title if p.slug.trim() is ''
+  cd = p.createdDateString.split('/')
+  #console.log p
+  # editing creation date
+  cdn = []
+  cdn.push parseInt(i,10) for i in cd
+  #console.log cd[0].trim
+  ts = if cd[0].trim() is '' then new Date() else new Date(cdn[0],cdn[1]-1,cdn[2])
 
+  p.createdAt =
+    timestamp: ts
+    year: ts.getFullYear()
+    month: ts.getMonth() + 1
+    day: ts.getDate()
+    slug: p.slug # ugly hack to make Router.pathFor work
+
+  if p._id?
+    Posts.update p._id,
+      $set:
+        title: p.title
+        tagline: p.tagline
+        credit: p.credit
+        link: p.link
+        categories: p.categories
+        mainCategory: p.mainCategory
+        tags: p.tags
+        body: p.body
+        slug: p.slug
+        updatedAt: new Date
+        updatedBy: Meteor.userId()
+        createdAt: p.createdAt
+  else
+    p.published = true
+    p.createdBy = Meteor.userId()
+    p._id = Posts.insert p
+  console.log "Saving and navigating", p
+#Router.go Router.path('showPost', _id: p._id)
+#Router.go('showPost', {_id: p._id})
