@@ -24,6 +24,11 @@ class @DataType
   @typedProperties: (propNames, checkPattern) =>
     @typedProperty n, checkPattern for n in propNames
 
+  # saves a document into collection if it's bound to one
+  save: ->
+    return unless @_collection? # it is set by typedCursor when it retrieves docs from the collection
+    @_collection.meteorCollection.update {_id: @_id}, {$set: @__getData()}
+
   ###
   This method converts all private property names that are like this: __propName
   into "dumb" object (without any getters or setters) with property names like: propName.
@@ -35,7 +40,7 @@ class @DataType
     ret = {}
     for p in props
       pnew = if p.indexOf('__') is 0 then p.substring(2) else p
-      ret[pnew] = @[p]
+      ret[pnew] = @[p] unless p in ['_id', '_collection'] # filtering out _id in collection and a reference to collection
     ret
 
   ###

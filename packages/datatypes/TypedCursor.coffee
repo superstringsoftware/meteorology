@@ -1,3 +1,6 @@
+# Wrapper over Mongo.Cursor
+# we are not exposing iteration and observe methods as there's not much use in them (currently, at least)
+# However, might need iteration in templates - need to experiment and think
 class @TypedCursor
   constructor: (cursor, dataType, collection)->
     @meteorCursor = cursor
@@ -15,3 +18,5 @@ class @TypedCursor
       #typedDoc._isPersistent = true
       res.push typedDoc
     res
+
+  count: -> @meteorCursor.count()
