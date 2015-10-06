@@ -36,3 +36,12 @@ class @DataType
       pnew = if p.indexOf('__') is 0 then p.substring(2) else p
       ret[pnew] = @[p]
     ret
+
+  ###
+  This function initializes DataType object from the "dumb" object - the same as the one returned by
+  __getData()
+  It's simpler than __getData() since we have getters / setters with proper names already, so we get
+  automatic typechecking as a bonus as well
+  ###
+  __fromData: (data)->
+    @[p] = data[p] for p in Object.getOwnPropertyNames data
