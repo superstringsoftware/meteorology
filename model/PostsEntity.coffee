@@ -1,5 +1,20 @@
+###
 # Persistent model class, shared between the server and the client
 # encapsulates posts collection and business logic over it
+# Post format - for future validation etc! -->
+  title: String
+  tagline: String
+  credit: String, who to credit if external
+  link: String, validated as an http link, if external - original post
+  categories: Array of String
+  mainCategory: String
+  tags: Array of String
+  body: String (markdown)
+  slug: String
+  updatedAt: Date
+  updatedBy: Meteor.userId()
+  createdAt: Date
+###
 
 @tb = Observatory.getToolbox() # get Toolbox for logging
 
@@ -37,6 +52,21 @@ class @PostsEntity
   find: (selector, options) ->
     tb.debug "calling PostsEntity.find(#{EJSON.stringify(selector)}, #{EJSON.stringify(options)})"
     @postsCollection.find selector, options
+
+  # validate post data - see post format at the top of the file
+  validate: (post) ->
+    tb.debug "calling PostsEntity.validate(#{EJSON.stringify(post)})"
+    errors = {}
+    validated = true
+    mandatoryFields = ['title', 'body']
+    # 1. Mandatory fields
+    for f in mandatoryFields
+      if post[f].trim is ''
+        validated = false
+        errors[f] = "Field #{f} cannot be empty"
+    ret = {validated: validated, errors: errors}
+    tb.debug "PostsEntity.validate returns #{EJSON.strinfigy(ret)}"
+    ret
 
   ###########################################################################
   # "Private" methods
