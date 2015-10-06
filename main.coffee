@@ -1,6 +1,6 @@
 tl = Observatory.getToolbox()
-@Posts = new Meteor.Collection 'posts'
-@allowAdmin = (uid)-> if Meteor.users.findOne(uid)?.securityProfile?.globalRole is "admin" then true else false
+
+@Posts = new PostsEntity()
 
 if Meteor.isServer
 
@@ -10,11 +10,6 @@ if Meteor.isServer
   au = Meteor.users.find({"securityProfile.globalRole": "admin"}).count()
   #Observatory.meteorServer.publish -> true
   Observatory.emitters.Monitor.startMonitor(300000)
-
-  Posts.allow
-    insert: allowAdmin
-    update: allowAdmin
-    remove: allowAdmin
 
   tl.info "Found " + au + " admin users"
   # accounts setup for initial admin user
@@ -40,17 +35,13 @@ if Meteor.isServer
     catch err
       tl.error("Admin account creation failed with error " + err.name + ", message: " + err.message + "<br/>\n" + err.stack)
 
-  # Publishing
-  Meteor.publish 'allPosts',->
-    tl.debug "Publishing All Posts for user #{@userId}"
-    Posts.find {}, sort: 'createdAt.timestamp': -1
-
   # publishing roles
   Meteor.publish "userData", ->
     tl.debug "Publishing user info for user #{@userId}"
     Meteor.users.find {_id: @userId}, {fields: {securityProfile: 1}}
 
   # if no posts exist, add some.
+  ###
   if Posts.find().count() is 0
 
     posts = [
@@ -80,6 +71,8 @@ if Meteor.isServer
         body: postData.body
         createdAt: new Date
 
+  ###
+
   #console.dir Meteor.server
 
 if Meteor.isClient
@@ -95,7 +88,7 @@ if Meteor.isClient
   Observatory.logMeteor()
   #Observatory.logTemplates()
 
-  CommonController.subscribe 'allPosts'
+  #CommonController.subscribe 'allPosts'
   CommonController.subscribe 'userData'
 
   UI.registerHelper "getSession", (name)-> Session.get name
