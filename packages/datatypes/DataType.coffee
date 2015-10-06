@@ -1,4 +1,5 @@
 # Base class for all typed classes (to mimic algebraic datatypes in the future plus type checking)
+# Can also be persistent if created through a TypedCollection
 
 class @DataType
 

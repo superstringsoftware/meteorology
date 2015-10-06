@@ -14,10 +14,12 @@ Package.onUse(function(api) {
   api.versionsFrom('1.2.0.2');
 
   var both = ['client', 'server'];
-  api.use(['ecmascript', 'coffeescript', 'ejson', 'check'], both);
+  api.use(['ecmascript', 'coffeescript', 'ejson', 'check', 'mongo'], both);
   // api.use('accounts-password', 'server');
 
   api.add_files('DataType.coffee', both);
+  api.add_files('TypedCollection.coffee', both);
+  api.add_files('TypedCursor.coffee', both);
   // api.add_files(['lib/Observatory.coffee'], both);
 
 
@@ -29,4 +31,5 @@ Package.onTest(function(api) {
   api.use('tinytest');
   api.use('superstringsoft:datatypes');
   api.addFiles('datatypes-tests.js');
+
 });
