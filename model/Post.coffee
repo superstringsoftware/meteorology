@@ -18,7 +18,7 @@ class @Post extends DataType
   constructor: (post)->
 
   @typedProperties ['title','tagline','credit','link','slug','body','mainCategory'], String
-  @typedProperties ['createdAt','updatedAt'], Date
+  #@typedProperties ['createdAt','updatedAt'], Date
   @typedProperties ['likeCount','viewCount'], Number
   @typedProperties ['categories','tags'], [String]
   #@typedProperty 'author', String

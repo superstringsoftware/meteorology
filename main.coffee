@@ -1,6 +1,7 @@
 tl = Observatory.getToolbox()
 
-@Posts = new PostsEntity()
+#@Posts = new PostsEntity()
+@Posts = new TypedCollection 'posts', Post
 
 if Meteor.isServer
 
