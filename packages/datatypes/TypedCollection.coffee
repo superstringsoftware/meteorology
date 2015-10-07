@@ -1,6 +1,6 @@
 class @TypedCollection
   # encapsulating Mongo Collection and storing DataType for checks
-  constructor: (name, dataType, autopublish = true)->
+  constructor: (name, dataType, autopublish = false)->
     @meteorCollection = new Mongo.Collection name
     @dataType = dataType
     @name = name
@@ -27,7 +27,64 @@ class @TypedCollection
   # TODO: optimize to insert limit:1 into options
   findOne: (selector, options)-> (@find selector, options).fetch()[0]
 
+
+  # publishing custom Find() to the client collection with collectionName
+  # this is needed to provide flexibility of having different collections on the client
+  # for the same server collection, something Meteor doesn't do for some reason
+  # Find() parameters are set on the server
+  publishObserve: (collectionName, selector, options) ->
+    return unless Meteor.isServer
+    col = @meteorCollection
+    Meteor.publish "#{collectionName}_subscription", ->
+      _self = this
+      selector = {} unless selector?
+      options = {} unless options?
+
+      handle = (col.find selector, options).observe
+        added: (doc)=>
+          @added(collectionName, doc._id, doc)
+
+        removed: (doc)=>
+          @removed(collectionName, doc._id)
+
+        changed: (oldDoc, newDoc)=>
+          @changed(collectionName, newDoc._id, newDoc)
+
+      _self.ready()
+      _self.onStop = -> handle.stop()
+      return
+
+
+
+# publishing custom Find() to the client collection with collectionName
+  # this is needed to provide flexibility of having different collections on the client
+  # for the same server collection, something Meteor doesn't do for some reason
+  # Find() parameters are taken from the client completely
+  publishObserveDangerous: (collectionName) ->
+    return unless Meteor.isServer
+    col = @meteorCollection
+    Meteor.publish "#{collectionName}_subscription", (selector, options)->
+      _self = this
+      selector = {} unless selector?
+      options = {} unless options?
+
+      handle = (col.find selector, options).observe
+        added: (doc)=>
+          @added(collectionName, doc._id, doc)
+
+        removed: (doc)=>
+          @removed(collectionName, doc._id)
+
+        changed: (oldDoc, newDoc)=>
+          @changed(collectionName, newDoc._id, newDoc)
+
+      _self.ready()
+      _self.onStop = -> handle.stop()
+      return
+
   # straightforward and pretty universal publish
+  # TODO: DANGEROUS - no checks on client parameters so can find anything. Better to use publishObserve. Or rethink
+  # TODO: (cont'd) how to combine server and client filters
   publishFind: ->
     return unless Meteor.isServer
     Meteor.publish "#{@name}_subscription", (selector, options)=>
@@ -36,8 +93,10 @@ class @TypedCollection
       #console.log "publishing with", selector, options
       @meteorCollection.find selector, options
 
-  # subscribe corresponding to publishFind()
-  subscribeFind: (selector, options) ->
+  # subscribe function that stores handle in our object
+  subscribe: (colName, selector, options) ->
     return if Meteor.isServer
-    @_handle?.stop()
-    @_handle = Meteor.subscribe "#{@name}_subscription", selector, options
+    @subscription?.stop()
+    @subscription = Meteor.subscribe "#{colName}_subscription", selector, options
+
+  subscribeFind: (selector, options)-> @subscribe @name, selector, options

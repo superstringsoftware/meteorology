@@ -8,3 +8,5 @@ class @CommonController
 
   @formatDate: (timestamp)->
     timestamp.toDateString()
+
+
