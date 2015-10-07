@@ -22,7 +22,6 @@ superstringsoft:datatypes
 coffeescript
 accounts-github
 spiderable
-showdown
 iron:router
 accounts-base
 ian:accounts-ui-bootstrap-3
@@ -32,3 +31,4 @@ accounts-password
 superstringsoft:observatory-beta
 ejson
 check
+markdown

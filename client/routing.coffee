@@ -5,7 +5,16 @@ Router.route '/',
 
 Router.route '/posts',
   name: 'posts'
-  waitOn: -> Meteor.subscribe "posts_subscription", {}, {}
+  waitOn: -> LastPosts.subscription
+  data: -> LastPosts.find().fetch()
+
+Router.route '/admin/newPost',
+  name: 'admin.newPost'
+  template: '_newPost'
+  data: -> post: new Post
+  waitOn: -> CommonController.subs.userData
+  onBeforeAction: ->
+    if allowInsert Meteor.userId() then @next() else Router.go '/'
 
 
 ###

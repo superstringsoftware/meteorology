@@ -1,0 +1,39 @@
+a, a:hover, a:active,
+#header .navbar-inverse .navbar-nav>li>a:hover,
+#header .navbar-inverse .navbar-nav>.active>a,
+#header .navbar-inverse .navbar-nav>.active>a:hover,
+#mobileMenu,
+#header a:hover,
+#footer a:hover,
+strong span,
+#blog .widget a:hover,
+#blog a.tag:hover,
+#default .styleColor {
+	color:#66B7E2;
+}	
+p span, i span,
+h1 span, h2 span,
+h3 span, h4 span,
+h5 span, h6 span,
+div.featured-box.nobg.border-only i.fa {
+	color:#66B7E2 !important;
+}
+
+.featured,
+.btn-primary,.btn-primary:hover,.btn-primary:active,
+p.dropcap.color:first-letter,
+.featured-box-minimal i.fa,
+div.featured-box i.fa,
+i.featured-icon {
+	background-color:#66B7E2;
+}
+.btn-primary,.btn-primary:hover,.btn-primary:active,
+div.featured-box.nobg.border-only i.fa,
+i.featured-icon:after,
+i.featured-icon {
+	border-color:#66B7E2;
+}
+.btn-primary:hover {
+	background-color:#3da3da;
+	border-color:#3da3da;
+}

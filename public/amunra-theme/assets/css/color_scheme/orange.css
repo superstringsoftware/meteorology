@@ -1,0 +1,31 @@
+a, a:hover, a:active,
+#header .navbar-inverse .navbar-nav>li>a:hover,
+#header .navbar-inverse .navbar-nav>.active>a,
+#header .navbar-inverse .navbar-nav>.active>a:hover,
+#mobileMenu,
+#header a:hover,
+#footer a:hover,
+strong span,
+#blog .widget a:hover,
+#blog a.tag:hover,
+#default .styleColor {
+	color:#F07057;
+}	
+p span, i span,
+h1 span, h2 span,
+h3 span, h4 span,
+h5 span, h6 span,
+div.featured-box.nobg.border-only i.fa {
+	color:#F07057 !important;
+}
+.featured,
+.featured-box-minimal i.fa,
+div.featured-box i.fa,
+i.featured-icon {
+	background-color:#F07057;
+}
+div.featured-box.nobg.border-only i.fa,
+i.featured-icon:after,
+i.featured-icon {
+	border-color:#F07057;
+}
