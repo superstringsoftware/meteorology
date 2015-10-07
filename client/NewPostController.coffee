@@ -19,6 +19,7 @@ class @NewPostController extends RouteController
 
   data: ->
     tl.debug "data() called with params", 'NewPostController'
+    #debugger
     console.log @params
     data =
       title: 'New Post'
@@ -37,7 +38,7 @@ class @NewPostController extends RouteController
         tags: []
         body: ''
 
-    Session.set "currentPost", post
+    #Session.set "currentPost", post
     data.post = post
     data
 

@@ -3,12 +3,12 @@ tl = Observatory.getToolbox()
 class @PostController extends RouteController
   template: "showPost"
 
-  waitOn: CommonController.getSubscription 'allPosts'
+  #waitOn: CommonController.getSubscription 'allPosts'
 
   data: ->
     console.log "Data in showPost called"
-    return {} unless CommonController.getSubscription('allPosts').ready()
-    tl.debug "data() called and subscription is #{CommonController.getSubscription('allPosts').ready()}", 'PostController'
+    #return {} unless CommonController.getSubscription('allPosts').ready()
+    #tl.debug "data() called and subscription is #{CommonController.getSubscription('allPosts').ready()}", 'PostController'
     console.log @params
     if @params._id
       post = Posts.findOne @params._id
@@ -72,5 +72,5 @@ Template.showPost.events
     tl.debug "Clicked on post " + tmpl.data._id
     # for now, only admin can edit posts
     # TODO: change to owners in the future
-    return unless allowAdmin(Meteor.userId())
+    return unless allowUpdate(Meteor.userId())
     Router.go Router.path('editPost', _id: tmpl.data._id)
