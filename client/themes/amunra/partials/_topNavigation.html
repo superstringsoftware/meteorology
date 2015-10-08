@@ -1,0 +1,41 @@
+<template name="_topNavigation">
+    <!-- TOP NAV -->
+    <section id="header">
+
+        <nav class="navbar navbar-inverse" role="navigation"><!-- add "white" class for white nav bar -->
+            <div class="container">
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenu" class="fa fa-bars" type="button" data-toggle="collapse" data-target=".navbar-collapse"></button>
+
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header" style="margin-top: 8px;">
+                    <a href="#home" class="scrollTo navbar-brand" title="superstring software">
+                        <!-- <img alt="superstring software" src="assets/images/logo.png" width="145" height="40">-->
+                        superstring <span style="color: #87711d;">software</span>
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div id="navbar-collapse" class="collapse navbar-collapse">
+
+                    <ul class="nav navbar-nav navbar-right"><!-- remove scrollTo class for external/real link -->
+                        <li><a class="scrollTo" href="#home">HOME</a></li>
+                        <li><a class="scrollTo" href="#about">ABOUT</a></li>
+                        <li><a class="scrollTo" href="#services">SERVICES</a></li>
+                        <li><a class="scrollTo" href="#work">WORK</a></li>
+                        <li><a class="scrollTo" href="#team">TEAM</a></li>
+                        <li><a href="blog.html">BLOG</a></li>
+                        <li><a class="scrollTo" href="#contact">CONTACT</a></li>
+                        <li style="margin-top: -8px;">{{> loginButtons }}</li>
+                    </ul>
+
+                </div><!-- /.navbar-collapse -->
+
+            </div>
+        </nav>
+
+    </section>
+    <!-- /TOP NAV -->
+
+</template>

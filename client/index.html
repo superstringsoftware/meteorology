@@ -3,53 +3,54 @@
     <title>Meteorology: wealth of knowledge on Meteor framework</title>
     <meta name="viewport" content="width=device-width">
     <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:300,400,700' rel='stylesheet' type='text/css'>
+
+
+    <!-- mobile settings -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+
+    <!-- WEB FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800" rel="stylesheet" type="text/css" />
+
+    <!-- CORE CSS -->
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/owl-carousel/owl.pack.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" type="text/css" />
+
+    <!-- THEME CSS -->
+    <link href="assets/css/essentials.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/layout.css" rel="stylesheet" type="text/css" />
+    <!--<link href="assets/css/color_scheme/orange.css" rel="stylesheet" type="text/css" />-->
+
+
+    <link href="assets/css/color_scheme/orange.css" rel="alternate stylesheet" type="text/css" title="orange" />
+
+    <!-- Morenizr -->
+    <script type="text/javascript" src="assets/plugins/modernizr.min.js"></script>
+
+
     <script src="/highlight/highlight.pack.js"></script>
     <link rel="stylesheet" href="/highlight/default.css">
-    <script type="text/javascript" src="/bootstrap.min.js"></script>
+
 </head>
-<body>
-<!-- {{>logs_bootstrap}} -->
+<body data-spy="scroll" data-offset="20" data-target="#navbar-collapse">
+
+
+<!-- JAVASCRIPT FILES -->
+
+<script type="text/javascript" src="assets/plugins/jquery.bxslider/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="assets/plugins/jquery.isotope.js"></script>
+<script type="text/javascript" src="assets/plugins/jquery.parallax-1.1.3.js"></script>
+<script type="text/javascript" src="assets/plugins/knob/js/jquery.knob.js"></script>
+
+<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="assets/plugins/owl-carousel/owl.carousel.min.js"></script>
+
+<script type="text/javascript" src="assets/js/scripts.js"></script>
+
 </body>
-
-<template name="layout">
-
-
-    <div class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <a href="{{pathFor 'posts'}}" class="navbar-brand">meteorology.io</a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <!--
-                    <li>
-                        <a href="{{pathFor 'posts'}}">posts</a>
-                    </li>
-                    -->
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li style="margin-top: 10px;">{{> loginButtons }}</li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="col-md-10">
-       {{> yield}}
-        </div>
-        <div class="col-md-2">
-            {{>_about}}
-            {{>_essentials}}
-        </div>
-    </div>
-
-
-{{>google}}
-</template>
-
 
 
 <template name="notFound">

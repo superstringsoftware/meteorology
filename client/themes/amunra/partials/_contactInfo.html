@@ -1,0 +1,48 @@
+<template name="_contactInfo">
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container">
+            <a href="#" class="toTop up fa fa-chevron-up"><!-- arrow up - go home --></a>
+
+            <header>
+                <h1>CONTACT</h1>
+                <p class="lead nopadding nomargin">Drop us a line or just say <strong><em>Hello!</em></strong></p>
+                <p>12a Some Street, New York, United States</p>
+                <a href="tel:1800-1234-567" class="lead">1800 - 1234 567</a>
+            </header>
+
+
+            <!-- Alert -->
+            <div id="_sent_ok_" class="alert alert-success fade in fsize16 hide">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <span id="_msg_txt_"><strong>Thank You!</strong> Your message successfully sent!</span>
+            </div>
+
+            <form id="contactForm" method="post" action="php/contact.php" class="row white block form-inline">
+
+                <div class="col-md-6 col-sm-6">
+                    <input required class="fullwidth form-control input-lg" type="text" name="contact_name" id="contact_name" value="" placeholder="NAME *" title="Name" />
+                    <input required class="fullwidth form-control input-lg" type="email" name="contact_email" id="contact_email" value="" placeholder="EMAIL *" title="Email" />
+                    <input class="fullwidth form-control input-lg" type="text" name="contact_subject" id="contact_subject" value="" placeholder="SUBJECT" title="subject" />
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+                    <textarea required class="fullwidth form-control input-lg" rows="6" name="contact_comment" id="contact_comment" placeholder="MESSAGE *"></textarea>
+                </div>
+
+                <div class="col-md-12 text-center margin-top30">
+                    <input type="hidden" name="captcha" id="captcha" value="" /><!-- hidden field - humans should not see it, only spam bots will see it -->
+                    <button id="contact_submit" class="btn btn-primary">SEND MESSAGE</button>
+                </div>
+
+            </form>
+
+        </div>
+
+        <!-- enable google map if needed! -->
+
+
+    </section>
+    <!-- /CONTACT -->
+
+</template>

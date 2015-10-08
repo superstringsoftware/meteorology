@@ -1,6 +1,94 @@
 <template name="main">
-    <h3>Hello world</h3>
-    {{#with this}}
-    {{> _post}}
-    {{/with}}
+    <!-- FEATURED -->
+    <div class="featured three"><!-- two , three , four, five - depends on featured list - for best responsive view (or no additional class = default view) -->
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-sm-12 col-md-7">
+                    <ul>
+                        <li>
+                            <a href="feature-shortcodes.html">
+                                <i class="fa fa-code"></i> Shortcodes
+                            </a>
+                        </li>
+                        <li>
+                            <a href="feature-icons.html">
+                                <i class="fa fa-leaf"></i> Font Awsome
+                            </a>
+                        </li>
+                        <li>
+                            <a href="feature-typography.html">
+                                <i class="fa fa-text-width"></i> Typography
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-5 hidden-xs hidden-sm text-right">
+
+                    <!-- text or button -->
+                    <p class="lead">Awsome Template Features - Check Them!</p>
+                    <!--<a href="#" class="btn btn-primary">PURCHASE TEMPLATE</a>-->
+                    <!--
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="http://theme.stepofweb.com/Atropos/index.php" target="_blank" rel="nofollow">Preview</a>
+                        <a class="btn btn-primary btn-left" target="_blank" rel="nofollow" title="Purchase Atropos Bootstrap Template" href="https://wrapbootstrap.com/theme/atropos-responsive-website-template-WB05SR527">Purchase</a>
+                    </div>
+                    -->
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- /FEATURED -->
+
+    <!-- WELCOME -->
+    <section id="about">
+        <div class="container">
+
+            <header>
+                <h1>WELCOME TO AMUNRA</h1>
+                <p>One of the primary sources of our success is taking care of the <span>quality and the dynamic development</span> of our products.</p>
+                <p>We invest in development to ensure that our products are safe and modern.</p>
+            </header>
+
+
+            <div class="text-center">
+                <img class="img-responsive" src="assets/images/demo/devices.png" alt="" />
+            </div>
+
+
+            <div class="divider"><!-- divider --></div>
+
+            <h3>We care about our customers</h3>
+            <p>Lorem elementum placerat mi, vel feugiat massa egestas in. Pellentesque id quam eget dolor tincidunt tempor. Sed pulvinar tortor sit amet tortor venenatis ut molestie lacus convallis. Phasellus vulputate congue posuere. Sed a placerat justo. Sed lacinia nulla at purus porta a placerat dui venenatis. Suspendisse sed lacus id urna faucibus pulvinar ut eu mi. Aliquam erat volutpat.</p>
+            <p>Praesent est laborum dolo rumes fugats untras. Etha rums ser quidem rerum facilis dolores nemis onis fugats vitaes nemo minima rerums unsers sadips amets.</p>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-icon check">
+                        <li>Responsive Layout</li>
+                        <li>Filterable Portfolio</li>
+                        <li>Fast &amp; Friendly Support</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6">
+                    <ul class="list-icon exclamation-circle color">
+                        <li>App Development</li>
+                        <li>Duis mollis, est non commodo</li>
+                        <li>Maecenas sed diam eget</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- /WELCOME -->
+
+    {{> _contactInfo }}
 </template>
