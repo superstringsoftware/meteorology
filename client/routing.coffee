@@ -13,6 +13,7 @@ Router.route '/posts',
 Router.route '/admin/newPost',
   name: 'admin.newPost'
   template: '_newPost'
+  layoutTemplate: 'blogLayout'
   data: -> post: new Post
   waitOn: -> CommonController.subs.userData
   onBeforeAction: ->
