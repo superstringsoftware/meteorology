@@ -24,35 +24,49 @@
 
 
 <template name="posts">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                {{#with lastPost}}
-                {{> _post }}
-                {{#with createdAt}}
-                <a href="{{pathFor 'showPostPermalink'}}">discussion</a>
-                {{/with}}
-                {{/with}}
 
-                <hr/>
+{{#each this}}
+    <!-- article - image -->
+    <div class="prev-article row">
+        <div class="blog-prev-date col-md-3 col-sm-3">
+								<span class="date">
+                                    {{createdAt.getDate}}
+									<small>{{createdAt.getMonth}} {{createdAt.getFullYear}}</small>
+								</span>
+								<span class="info hidden-xs">
+									<span class="block"><i class="fa fa-user"></i> BY <a href="blog-author.html">ADMIN</a></span>
+									<span class="block"><i class="fa fa-folder-open-o"></i> POSTED IN <a href="blog.html">UNCATEGORIZED</a></span>
+									<span class="block"><i class="fa fa-comments"></i> WITH <a href="blog-single.html#comments">3 COMMENTS</a></span>
+									<span class="block"><i class="fa fa-link"></i> <a href="blog-single.html">PERMALINK</a></span>
+								</span>
+        </div>
 
-                {{#each this}}
-                {{#with createdAt}}
-                <a href="{{pathFor 'showPostPermalink'}}">
-                <h3> {{../title}}</h3>
+        <div class="col-md-9 col-sm-9">
+
+            <h2 class="article-title"><a href="{{pathFor 'showPostPermalink'}}">{{title}}</a></h2>
+            <h6>{{tagline}}</h6>
+
+            <!-- image -->
+            <figure>
+                <a href="blog-single.html">
+                    <img src="assets/images/demo/conference.jpg" class="img-responsive" alt="blog" />
                 </a>
-                {{/with}}
-                <h5>
-                    {{formatDate createdAt.timestamp}}
-                    {{#if credit}} | <em>credit for the original post: <a href="{{link}}">{{credit}}</a></em>{{/if}}
-                </h5>
-                <h4>{{tagline}}</h4>
-                {{#with createdAt}}
-                <a href="{{pathFor 'showPostPermalink'}}">Read the whole post</a>
-                {{/with}}
-                {{/each}}
+            </figure>
+
+            <!-- blog short preview -->
+            <p>
+                {{body}}
+            </p>
+
+            <!-- read more button -->
+            <div class="text-right">
+                <a href="{{pathFor 'showPostPermalink'}}" class="read-more btn btn-xs"><i class="fa fa-sign-out"></i> READ MORE</a>
             </div>
+
         </div>
     </div>
+    <!-- /article - image -->
+
+{{/each}}
 </template>
 

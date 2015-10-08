@@ -8,6 +8,7 @@ Router.route '/posts',
   name: 'posts'
   waitOn: -> LastPosts.subscription
   data: -> LastPosts.find().fetch()
+  layoutTemplate: 'blogLayout'
 
 Router.route '/admin/newPost',
   name: 'admin.newPost'
