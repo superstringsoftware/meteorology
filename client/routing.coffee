@@ -18,6 +18,12 @@ Router.route '/admin/newPost',
   onBeforeAction: ->
     if allowInsert Meteor.userId() then @next() else Router.go '/'
 
+Router.route '/post/:_id',
+  name: 'showPostPermalink'
+  template: '_post'
+  layoutTemplate: 'blogLayout'
+  data: -> LastPosts.findOne _id: @params._id
+
 
 ###
 Router.route 'posts', path: '/'

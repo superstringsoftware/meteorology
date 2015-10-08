@@ -1,15 +1,87 @@
 <!-- single post -->
 <template name="_post">
-    <h2>{{title}}</h2>
-    <h4>{{tagline}}</h4>
-    <h5>
-        {{formatDate createdAt.timestamp}}
-        {{#if credit}} | <em>credit for the original post: <a href="{{link}}">{{credit}}</a></em>{{/if}}
-    </h5>
-    <p>
-    {{#markdown}}
-    {{{body}}}
-    {{/markdown}}
-    </p>
+    <div class="prev-article row">
+
+        <div class="blog-prev-date col-md-3 col-sm-3">
+								<span class="date">
+									29 <small>JUN 2014</small>
+								</span>
+								<span class="info hidden-xs">
+									<span class="block"><i class="fa fa-user"></i> BY <a href="blog-author.html">ADMIN</a></span>
+									<span class="block"><i class="fa fa-folder-open-o"></i> POSTED IN <a href="blog.html">UNCATEGORIZED</a></span>
+									<span class="block"><i class="fa fa-comments"></i> WITH <a href="blog-single.html#comments">3 COMMENTS</a></span>
+									<span class="block"><i class="fa fa-link"></i> <a href="blog-single.html">PERMALINK</a></span>
+								</span>
+        </div>
+
+        <div class="col-md-9 col-sm-9">
+
+            <h1>{{title}}</h1>
+            <h4>{{tagline}}</h4>
+
+            <!-- carousel -->
+            <!-- transitionStyle: fade, backSlide, goDown, fadeUp,  -->
+            <!--
+            <div class="owl-carousel text-center controlls-over" data-plugin-options='{"items": 1, "singleItem": true, "navigation": true, "pagination": true, "autoPlay": true, "transitionStyle":"fadeUp"}'>
+            <div class="item">
+                    <img src="/assets/images/demo/people.jpg" class="img-responsive" alt="img" />
+                </div>
+                <div class="item">
+                    <img src="/assets/images/demo/conference.jpg" class="img-responsive" alt="img" />
+                </div>
+            </div> -->
+            <!-- /carousel -->
+
+            <!-- image -->
+            <!--<img src="assets/images/demo/conference.jpg" class="img-responsive" alt="img" />-->
+            <!-- /image -->
+
+            <!-- video -->
+            <!-- <iframe src="https://player.vimeo.com/video/8408210" width="800" height="450"></iframe> -->
+            <!-- /video -->
+
+
+            <!-- article content -->
+            <article>
+                {{#markdown}}
+                    {{{body}}}
+                {{/markdown}}
+                <p class="dropcap">Aliquam fringilla, sapien eget scelerisque placerat, lorem libero cursus lorem, sed sodales lorem libero eu sapien. Nunc mattis feugiat justo vel faucibus. Nulla consequat feugiat malesuada. Ut justo nulla, <strong>facilisis vel molestie id</strong>, dictum ut arcu. Nunc ipsum nulla, eleifend non blandit quis, luctus quis orci. Cras blandit turpis mattis nulla ultrices interdum. Mauris pretium pretium dictum. Nunc commodo, felis sed dictum bibendum, risus justo iaculis dui, nec euismod orci sem eget neque. Donec in metus metus, vitae eleifend lorem. Ut vestibulum gravida venenatis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Pellentesque suscipit tincidunt magna non mollis. Fusce tempus tincidunt nisi, in luctus elit pellentesque quis. Sed velit mi, ullamcorper ut tempor ut, mattis eu lacus. Morbi rhoncus aliquet tellus, id accumsan enim sollicitudin vitae.</p>
+                <p>Vivamus <a href="#">magna justo</a>, lacinia eget consectetur sed, convallis at tellus. Cras ultricies ligula sed magna dictum porta. Curabitur aliquet quam id dui posuere blandit. Sed porttitor lectus nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Nulla porttitor accumsan tincidunt.</p>
+
+                <!-- BLOCKQUOTE -->
+                <blockquote>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <cite>Source Title</cite>
+                </blockquote>
+
+                <p>Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.Quisque velit nisi, pretium ut lacinia in, elementum id enim. Sed porttitor lectus nibh. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Pellentesque in ipsum id orci porta dapibus. Nulla quis lorem ut libero malesuada feugiat. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.</p>
+                <p>Proin eget tortor risus. Cras ultricies ligula sed magna dictum porta. Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor accumsan tincidunt. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </article>
+
+
+            <!-- SOCIAL -->
+            <p class="socials">
+                <a href="#" class="rounded-icon social fa fa-facebook"><!-- facebook --></a>
+                <a href="#" class="rounded-icon social fa fa-twitter"><!-- twitter --></a>
+                <a href="#" class="rounded-icon social fa fa-google-plus"><!-- google plus --></a>
+                <a href="#" class="rounded-icon social fa fa-pinterest"><!-- pinterest --></a>
+                <a href="#" class="rounded-icon social fa fa-linkedin"><!-- linkedin --></a>
+            </p>
+
+            <!-- TAGS -->
+            <p class="fsize16"> Tags:
+                <a class="tag label label-default light" href="#"><i class="fa fa-tags"></i> Business</a>
+                <a class="tag label label-default light" href="#"><i class="fa fa-tags"></i> Design</a>
+                <a class="tag label label-default light" href="#"><i class="fa fa-tags"></i> Technology</a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <div id="comments">
+        {{>disqus}}
+    </div>
 
 </template>
