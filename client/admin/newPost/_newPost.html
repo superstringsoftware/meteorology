@@ -1,0 +1,115 @@
+<!-- single post -->
+<template name="_newPost1">
+{{#with post}}
+    <div class="prev-article row">
+
+        <div class="blog-prev-date col-md-3 col-sm-3">
+								<span class="date">
+									{{createdAt.getDate}}
+                                    <small>{{createdAt.getMonth}} {{createdAt.getFullYear}}</small>
+								</span>
+								<span class="info hidden-xs">
+									<span class="block"><i class="fa fa-user"></i> BY <a href="blog-author.html">ADMIN</a></span>
+									<span class="block"><i class="fa fa-folder-open-o"></i> POSTED IN <a href="blog.html">UNCATEGORIZED</a></span>
+									<span class="block"><i class="fa fa-comments"></i> WITH <a href="blog-single.html#comments">3 COMMENTS</a></span>
+									<span class="block"><i class="fa fa-link"></i> <a href="blog-single.html">PERMALINK</a></span>
+								</span>
+        </div>
+
+        <div class="col-md-9 col-sm-9">
+
+            <h1><input type="text" class="form-control" id="title" placeholder="Enter Title" value="{{title}}"></h1>
+            <h4><input type="text" class="form-control" id="tagline" placeholder="Enter tagline..." value="{{tagline}}"></h4>
+
+            <!-- carousel -->
+            <!-- transitionStyle: fade, backSlide, goDown, fadeUp,  -->
+            <!--
+            <div class="owl-carousel text-center controlls-over" data-plugin-options='{"items": 1, "singleItem": true, "navigation": true, "pagination": true, "autoPlay": true, "transitionStyle":"fadeUp"}'>
+            <div class="item">
+                    <img src="/assets/images/demo/people.jpg" class="img-responsive" alt="img" />
+                </div>
+                <div class="item">
+                    <img src="/assets/images/demo/conference.jpg" class="img-responsive" alt="img" />
+                </div>
+            </div> -->
+            <!-- /carousel -->
+
+            <!-- image -->
+            <!--<img src="assets/images/demo/conference.jpg" class="img-responsive" alt="img" />-->
+            <!-- /image -->
+
+            <!-- video -->
+            <!-- <iframe src="https://player.vimeo.com/video/8408210" width="800" height="450"></iframe> -->
+            <!-- /video -->
+
+
+            <!-- article content -->
+            <article>
+                <textarea id='body' class='form-control' style="height: 400px;">
+                    {{body}}</textarea>
+            </article>
+
+
+
+
+        </div>
+
+    </div>
+
+{{/with}}
+</template>
+
+
+
+
+
+
+
+
+<template name="_newPost">
+    {{#with post}}
+    <div class="form-group">
+        <input type="text" class="form-control" id="title" placeholder="Enter Title" value="{{title}}">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="slug" placeholder="slug for permalink" value="{{slug}}">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="tagline" placeholder="Enter tagline..." value="{{tagline}}">
+    </div>
+    <div class="form-inline">
+        <div class="form-group">
+            <input type="text" class="form-control" id="link" placeholder="Link if applicable" value="{{link}}">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="credit" placeholder="Credits to" value="{{credit}}">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" id="createdDate" value="{{createdAt.year}}/{{createdAt.month}}/{{createdAt.day}}">
+        </div>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <div class="form-group">
+        <textarea id='body' class='form-control' style="height: 400px;">
+{{body}}</textarea>
+    </div>
+    <div class="form-inline">
+
+        <a href="#" id="lnkCancel">Cancel</a> |
+        <a href="#" id="lnkPublish">Publish</a>
+
+        <div class="form-group">
+        <select id="category" value="{{mainCategory}}">
+            <option value="post">post</option>
+            <option value="article">article</option>
+            <option value="external">external</option>
+        </select>
+        <a href="#" id="lnkDelete"> ! Delete</a>
+        </div>
+    </div>
+
+    {{/with}}
+
+</template>

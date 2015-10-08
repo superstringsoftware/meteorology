@@ -1,61 +1,9 @@
 tl = Observatory.getToolbox()
 
-class @NewPostController extends RouteController
-  template: "newPost"
-
-  onBeforeRun: ->
-
-  waitOn: ->
-    tl.debug "Waiting on subscription..."
-    CommonController.getSubscription 'userData'
-
-  runWithCheck: ->
-    #t = allowAdmin(Meteor.userId())
-    s = CommonController.getSubscription 'userData'
-    tl.debug "runWithCheck called with for " + s.ready()
-    #console.dir Meteor.user()
-    #@redirect('/') unless allowAdmin(Meteor.userId())
-    @render()
-
-  data: ->
-    tl.debug "data() called with params", 'NewPostController'
-    #debugger
-    console.log @params
-    data =
-      title: 'New Post'
-    if @params._id?
-      post = Posts.findOne @params._id
-      data.title = 'Edit Post'
-    else
-      post =
-        title: ''
-        tagline: ''
-        credit: ''
-        link: ''
-        categories: []
-        mainCategory: 'post'
-        published: false
-        tags: []
-        body: ''
-
-    #Session.set "currentPost", post
-    data.post = post
-    data
-
-  run: ->
-    tl.debug "run() called", 'NewPostController'
-    super
-
-
-
-
-Template.newPost.rendered = ->
+Template._newPost.rendered = ->
   tl.debug "rendered() called", 'Template.newPost'
 
-Template.newPost.helpers
-  post: -> Session.get "currentPost"
-
-Template.newPost.events
+Template._newPost.events
   'click #lnkDelete': (e,tmpl) ->
     p = tmpl.data.post
     Posts.remove p._id
@@ -87,7 +35,7 @@ Template.newPost.events
     Router.go('showPost', {_id: p._id})
 
 
-Template.newPost.savePost = (post)->
+Template._newPost.savePost = (post)->
   tl.debug 'Saving post', 'NewPostController'
   p = post
   p.slug = escape p.title if p.slug.trim() is ''
@@ -126,5 +74,5 @@ Template.newPost.savePost = (post)->
     p.createdBy = Meteor.userId()
     p._id = Posts.insert p
   console.log "Saving and navigating", p
-#Router.go Router.path('showPost', _id: p._id)
-#Router.go('showPost', {_id: p._id})
+  #Router.go Router.path('showPost', _id: p._id)
+  #Router.go('showPost', {_id: p._id})
