@@ -1,6 +1,6 @@
 tl = tb = Observatory.getToolbox()
 
-@Posts = new TypedCollection 'posts', Post
+@Posts = new TypedCollection 'posts', Post, true
 
 # security methods - probably should go to a separate security class eventually
 @allowInsert = (uid)->
@@ -19,6 +19,10 @@ tl = tb = Observatory.getToolbox()
   msg = "Returning " + ret + " from allowRemove for " + uid + " and owner " + ownerId
   tb.debug msg
   ret
+
+Posts.meteorCollection.allow
+  insert: allowInsert
+
 
 if Meteor.isClient
   #Observatory.subscribe(50)

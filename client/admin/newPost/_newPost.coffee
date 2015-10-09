@@ -17,8 +17,9 @@ Template._newPost.events
   # saving post to the database
   # validation is done here - just checking for title now
   'click #lnkPublish': (evt, tmpl)->
-    return unless allowAdmin(Meteor.userId())
+    #return unless allowAdmin(Meteor.userId())
     p = tmpl.data.post
+    console.log "Saving post", p
     p.title = $('#title').val()
     p.tagline = $('#tagline').val()
     p.credit = $('#credit').val()
@@ -26,13 +27,14 @@ Template._newPost.events
     p.body = $('#body').val()
     p.mainCategory = $('#category').val()
     p.slug = $('#slug').val()
-    p.createdDateString = $('#createdDate').val()
+    p.createdAt = new Date
+    #p.createdDateString = $('#createdDate').val()
 
     #console.log p
     # TODO: add validation notifications
     return if (p.title.trim() is '') or (p.body.trim() is '')
-    Template.newPost.savePost p
-    Router.go('showPost', {_id: p._id})
+    id = Posts.insert p
+    Router.go("/post/#{id}")
 
 
 Template._newPost.savePost = (post)->
