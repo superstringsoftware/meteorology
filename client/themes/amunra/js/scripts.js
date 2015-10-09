@@ -29,9 +29,10 @@
 	var is_msie = (navigator.appVersion.indexOf("MSIE")!=-1) ? true : false;
 
 	/* Init */
+/*
 	jQuery(window).ready(function () {
 		Core();
-	});
+	}); */
 
 
 /** Core
@@ -1384,3 +1385,5 @@
 			});
 		};
 	}(jQuery));
+
+window.Core = Core

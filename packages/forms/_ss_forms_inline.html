@@ -1,0 +1,8 @@
+<!-- shouldn't be called directly -->
+<template name="_ss_forms_inline">
+    {{#if options.isEditing}}
+        <input type="{{options.inputType}}" class="{{options.class}}" id="{{options.id}}" placeholder="{{options.placeholder}}" value="{{editedProperty}}">
+    {{else}}
+        {{editedProperty}}
+    {{/if}}
+</template>

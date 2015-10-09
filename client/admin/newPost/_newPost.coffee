@@ -2,7 +2,7 @@ tl = Observatory.getToolbox()
 
 Template._newPost.rendered = ->
   tl.debug "rendered() called", 'Template.newPost'
-  
+
 Template._newPost.events
   'click #lnkDelete': (e,tmpl) ->
     p = tmpl.data.post

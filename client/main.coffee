@@ -7,3 +7,5 @@ LastPosts.subscribe 'lastPosts'
 
 Template.registerHelper "shortMonthName", (num)->
   ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][num]
+
+Meteor.startup -> Core()
