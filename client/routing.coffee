@@ -4,8 +4,9 @@ Router.route '/',
   data: -> LastPosts.findOne {}, sort: createdAt: -1
   layoutTemplate: 'mainLayout'
 
-Router.route '/posts',
-  name: 'posts'
+Router.route '/blog',
+  name: 'blog'
+  template: 'posts'
   waitOn: -> LastPosts.subscription
   data: -> LastPosts.find({}, sort: createdAt: -1).fetch()
   layoutTemplate: 'blogLayout'
@@ -13,8 +14,11 @@ Router.route '/posts',
 Router.route '/admin/newPost',
   name: 'admin.newPost'
   template: '_newPost'
-  layoutTemplate: 'blogLayout'
-  data: -> post: new Post
+  #layoutTemplate: 'mainLayout'
+  data: ->
+    post = new Post
+    post.tags = ['test tag']
+    post
   waitOn: -> CommonController.subs.userData
   onBeforeAction: ->
     if allowInsert Meteor.userId() then @next() else Router.go '/'

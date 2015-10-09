@@ -1,7 +1,25 @@
 <template name="layout">
     {{> _topNavigation}}
 
-    {{> yield}}
+    <!-- BLOG CONTENT -->
+    <section>
+        <div class="container">
+
+            <div class="row">
+
+                <!-- BLOG ARTICLE LIST -->
+                <div class="col-md-12 col-sm-12">
+                    {{> yield}}
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+    <!-- /BLOG CONTENT -->
+
 
     <!-- FOOTER -->
     <footer>

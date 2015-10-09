@@ -2,6 +2,12 @@ tl = Observatory.getToolbox()
 
 Template._newPost.rendered = ->
   tl.debug "rendered() called", 'Template.newPost'
+  @computation = @autorun -> Template.currentData()
+  console.log @computation
+  Session.set "_newPost.tags", @data.tags
+
+Template._newPost.helpers
+  tags1: -> Session.get "_newPost.tags"
 
 Template._newPost.events
   'click #lnkDelete': (e,tmpl) ->
@@ -13,6 +19,18 @@ Template._newPost.events
     id = tmpl.data.post._id
     console.log "clicked cancel", id
     Router.go('/posts')
+
+  'keypress #newTag': (evt, tmpl)->
+    return unless evt.keyCode is 13
+    p = Template.currentData() #tmpl.data.post
+    tag = $("#newTag").val()
+    #console.log "adding tag to ", p, tag
+    #console.log evt
+    p.tags.push tag
+    console.log p
+    Session.set "_newPost.tags", p.tags
+    p.__invalidate()
+    #tmpl.computation.invalidate()
 
   # saving post to the database
   # validation is done here - just checking for title now

@@ -20,6 +20,6 @@ class @Post extends DataType
   @typedProperties ['title','tagline','credit','link','slug','body','mainCategory', 'createdBy', 'updatedBy'], String
   @typedProperties ['createdAt','updatedAt'], Date
   @typedProperties ['likeCount','viewCount'], Number
-  @typedProperties ['categories','tags'], [String]
+  @typedProperties ['categories','tags'], [String], true #reactive
   @typedProperty 'published', Boolean
   #@typedProperty 'author', String

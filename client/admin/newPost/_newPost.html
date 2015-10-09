@@ -10,7 +10,7 @@
 								</span>
 								<span class="info hidden-xs">
 									<span class="block"><i class="fa fa-user"></i> BY <a href="blog-author.html">ADMIN</a></span>
-									<span class="block"><i class="fa fa-folder-open-o"></i> POSTED IN <a href="blog.html">UNCATEGORIZED</a></span>
+									<span class="block"><i class="fa fa-folder-open-o"></i> POSTED IN <a href="blog.html">{{mainCategory}}</a></span>
 									<span class="block"><i class="fa fa-comments"></i> WITH <a href="blog-single.html#comments">3 COMMENTS</a></span>
 									<span class="block"><i class="fa fa-link"></i> <a href="blog-single.html">PERMALINK</a></span>
 								</span>
@@ -67,7 +67,7 @@
 
 
 <template name="_newPost">
-    {{#with post}}
+
     <div class="form-group">
         <input type="text" class="form-control" id="title" placeholder="Enter Title" value="{{title}}">
     </div>
@@ -77,6 +77,7 @@
     <div class="form-group">
         <input type="text" class="form-control" id="tagline" placeholder="Enter tagline..." value="{{tagline}}">
     </div>
+    <!--
     <div class="form-inline">
         <div class="form-group">
             <input type="text" class="form-control" id="link" placeholder="Link if applicable" value="{{link}}">
@@ -87,7 +88,7 @@
         <div class="form-group">
             <input class="form-control" type="text" id="createdDate" value="{{createdAt.year}}/{{createdAt.month}}/{{createdAt.day}}">
         </div>
-    </div>
+    </div> -->
 
     <p>&nbsp;</p>
 
@@ -95,6 +96,19 @@
         <textarea id='body' class='form-control' style="height: 400px;">
 {{body}}</textarea>
     </div>
+    <div class="form-inline">
+        <div class="form-group">
+            <p class="fsize16"> Tags:
+            <input type="text" class="form-control" id="newTag" placeholder="Add tags..." value="">
+            {{#each tags}}
+                <a class="tag label label-default light" href="#"><i class="fa fa-tags"></i> {{this}}</a>
+            {{/each}}
+            </p>
+        </div>
+    </div>
+
+
+
     <div class="form-inline">
 
         <a id="lnkCancel">Cancel</a> |
@@ -110,6 +124,6 @@
         </div>
     </div>
 
-    {{/with}}
+
 
 </template>
