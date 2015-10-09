@@ -62,7 +62,8 @@ class @DataType
     ret = {}
     for p in props
       pnew = if p.indexOf('__') is 0 then p.substring(2) else p
-      ret[pnew] = @[p] unless p in ['_id', '_collection'] # filtering out _id in collection and a reference to collection
+      # filtering out _id in collection and a reference to collection (set from TypedCursor!!!)
+      ret[pnew] = @[p] unless p in ['_id', '_collection']
     ret
 
   ###
