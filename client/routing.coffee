@@ -7,7 +7,7 @@ Router.route '/',
 Router.route '/posts',
   name: 'posts'
   waitOn: -> LastPosts.subscription
-  data: -> LastPosts.find().fetch()
+  data: -> LastPosts.find({}, sort: createdAt: -1).fetch()
   layoutTemplate: 'blogLayout'
 
 Router.route '/admin/newPost',
