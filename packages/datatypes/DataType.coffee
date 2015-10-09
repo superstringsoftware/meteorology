@@ -37,7 +37,7 @@ class @DataType
           check value, checkPattern
           @[privatePropName] = value
 
-  @typedProperties: (propNames, checkPattern, reactive = false) =>
+  @typedProperties: (propNames, checkPattern, reactive = false) ->
     @typedProperty n, checkPattern, reactive for n in propNames
 
   # saves a document into collection if it's bound to one
