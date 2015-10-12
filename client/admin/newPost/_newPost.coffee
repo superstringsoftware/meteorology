@@ -18,6 +18,7 @@ Template._newPost.events
     return unless evt.keyCode is 13
     p = Template.currentData()
     tag = $("#newTag").val()
+    p.tags = [] unless p.tags?
     p.tags.push tag
     #console.log p
     $("#newTag").val("")
@@ -29,9 +30,9 @@ Template._newPost.events
   'click #lnkPublish': (evt, tmpl)->
     #return unless allowAdmin(Meteor.userId())
     p = Template.currentData()
-    # TODO: add validation notifications
-    return if (p.title.trim() is '') or (p.body.trim() is '')
-    console.log "Saving post", p
+    #console.log p
+
+    #console.log "Saving post", p
     p.title = $('#title').val()
     p.tagline = $('#tagline').val()
     #p.credit = $('#credit').val()
@@ -39,6 +40,9 @@ Template._newPost.events
     p.body = $('#body').val()
     p.mainCategory = $('#category').val()
     p.slug = $('#slug').val()
+
+    # TODO: add validation notifications
+    return if (p.title.trim() is '') or (p.body.trim() is '')
 
     if p.isPersistent()
       p.updatedAt = new Date
