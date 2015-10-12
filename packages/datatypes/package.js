@@ -23,7 +23,7 @@ Package.onUse(function(api) {
   // api.add_files(['lib/Observatory.coffee'], both);
 
 
-  // api.export('TLog');
+  //Npm.require('fs');
 });
 
 Package.onTest(function(api) {

@@ -45,6 +45,9 @@ class @DataType
     return unless @_collection? # it is set by typedCursor when it retrieves docs from the collection
     @_collection.meteorCollection.update {_id: @_id}, {$set: @__getData()}
 
+  # check if this object was retrieved from a collection and is persistent so that save() can be called on it
+  isPersistent: -> if @_collection? then true else false
+
   ###
   Forces ALL reactive deps to become invalidated (FIXME: this is a workaround for quickly making Arrays pseudo-reactive - need a better solution)
   ###

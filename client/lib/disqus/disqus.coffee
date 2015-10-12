@@ -32,7 +32,7 @@ Template.disqus.rendered = ->
       #console.log 'running disqus thingy'
       # Below is the Disqus Universal Code
       # * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * *
-      disqus_shortname = "meteorology" # required: replace example with your forum shortname
+      disqus_shortname = 'superstringsoftware' #"meteorology" # required: replace example with your forum shortname
 
     # * * DON'T EDIT BELOW THIS LINE * *
       (->

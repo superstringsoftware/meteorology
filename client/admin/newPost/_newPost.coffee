@@ -10,9 +10,9 @@ Template._newPost.events
     Router.go Router.path('posts')
 
   'click #lnkCancel': (evt, tmpl)->
-    id = tmpl.data.post._id
-    console.log "clicked cancel", id
-    Router.go('/posts')
+    #id = tmpl.data.post._id
+    #console.log "clicked cancel", id
+    Router.go('/blog')
 
   'keypress #newTag': (evt, tmpl)->
     return unless evt.keyCode is 13
@@ -29,6 +29,8 @@ Template._newPost.events
   'click #lnkPublish': (evt, tmpl)->
     #return unless allowAdmin(Meteor.userId())
     p = Template.currentData()
+    # TODO: add validation notifications
+    return if (p.title.trim() is '') or (p.body.trim() is '')
     console.log "Saving post", p
     p.title = $('#title').val()
     p.tagline = $('#tagline').val()
@@ -37,13 +39,17 @@ Template._newPost.events
     p.body = $('#body').val()
     p.mainCategory = $('#category').val()
     p.slug = $('#slug').val()
-    p.createdAt = new Date
-    #p.createdDateString = $('#createdDate').val()
 
+    if p.isPersistent()
+      p.updatedAt = new Date
+      p.save()
+      id = p._id
+    else
+      p.createdAt = new Date
+      id = Posts.insert p
+
+    #p.createdDateString = $('#createdDate').val()
     #console.log p
-    # TODO: add validation notifications
-    return if (p.title.trim() is '') or (p.body.trim() is '')
-    id = Posts.insert p
     Router.go("/post/#{id}")
 
 

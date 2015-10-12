@@ -22,6 +22,8 @@ tl = tb = Observatory.getToolbox()
 
 Posts.meteorCollection.allow
   insert: allowInsert
+  update: allowUpdate
+  remove: allowRemove
 
 
 if Meteor.isClient

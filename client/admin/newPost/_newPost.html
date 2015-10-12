@@ -77,6 +77,19 @@
     <div class="form-group">
         <input type="text" class="form-control" id="tagline" placeholder="Enter tagline..." value="{{tagline}}">
     </div>
+
+    <div class="form-inline">
+        <div class="form-group">
+            <input class="form-control" type="text" id="createdYear" value="{{createdAt.getFullYear}}">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" id="createdMonth" value="{{createdAt.getMonth}}">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" id="createdDay" value="{{createdAt.getDate}}">
+        </div>
+    </div>
+
     <!--
     <div class="form-inline">
         <div class="form-group">

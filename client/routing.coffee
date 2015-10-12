@@ -15,13 +15,20 @@ Router.route '/admin/newPost',
   name: 'admin.newPost'
   template: '_newPost'
   #layoutTemplate: 'mainLayout'
-  data: ->
-    post = new Post
-    post.tags = ['test tag']
-    post
+  data: -> new Post
   waitOn: -> CommonController.subs.userData
   onBeforeAction: ->
     if allowInsert Meteor.userId() then @next() else Router.go '/'
+
+Router.route '/admin/editPost/:_id',
+  name: 'admin.editPost'
+  template: '_newPost'
+  #layoutTemplate: 'mainLayout'
+  data: -> Posts.findOne _id: @params._id
+  waitOn: -> CommonController.subs.userData
+  onBeforeAction: ->
+    if allowInsert Meteor.userId() then @next() else Router.go '/'
+
 
 Router.route '/post/:_id',
   name: 'showPostPermalink'
