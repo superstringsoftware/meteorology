@@ -5,9 +5,9 @@ Template._newPost.rendered = ->
 
 Template._newPost.events
   'click #lnkDelete': (e,tmpl) ->
-    p = tmpl.data.post
+    p = Template.currentData()
     Posts.remove p._id
-    Router.go Router.path('posts')
+    Router.go '/blog'
 
   'click #lnkCancel': (evt, tmpl)->
     #id = tmpl.data.post._id
@@ -46,6 +46,7 @@ Template._newPost.events
       id = p._id
     else
       p.createdAt = new Date
+      p.ownerId = Meteor.userId()
       id = Posts.insert p
 
     #p.createdDateString = $('#createdDate').val()

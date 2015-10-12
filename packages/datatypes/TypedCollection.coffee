@@ -15,6 +15,9 @@ class @TypedCollection
     check doc, @dataType
     @meteorCollection.insert doc.__getData()
 
+  remove: (selector, callback)->
+    @meteorCollection.remove selector, callback
+
   # returning a TypedCursor that has the same API as a Cursor but wraps it for some functions
   find: (selector, options)->
     #console.log "Find", selector, options

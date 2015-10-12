@@ -8,15 +8,15 @@ tl = tb = Observatory.getToolbox()
   msg = "Returning " + ret + " from allowInsert for " + uid
   tb.debug msg
   ret
-@allowUpdate = (uid, ownerId)->
+@allowUpdate = (uid, doc)->
   role = Meteor.users.findOne(uid)?.securityProfile?.globalRole
-  ret = if (role is 'admin') or (uid is ownerId) then true else false
-  msg = "Returning " + ret + " from allowUpdate for " + uid + " and owner " + ownerId
+  ret = if (role is 'admin') or (uid is doc.ownerId) then true else false
+  msg = "Returning " + ret + " from allowUpdate for " + uid + " and owner " + doc.ownerId
   tb.debug msg
   ret
-@allowRemove = (uid, ownerId)->
-  ret = _allowUpdate uid, ownerId
-  msg = "Returning " + ret + " from allowRemove for " + uid + " and owner " + ownerId
+@allowRemove = (uid, doc)->
+  ret = allowUpdate uid, doc
+  msg = "Returning " + ret + " from allowRemove for " + uid + " and owner " + doc.ownerId
   tb.debug msg
   ret
 
@@ -45,6 +45,8 @@ if Meteor.isClient
   UI.registerHelper "getSession", (name)-> Session.get name
   UI.registerHelper "formatDate", (timestamp)->
     timestamp?.toDateString?()
+
+  UI.registerHelper "canEdit", (doc)-> allowUpdate Meteor.userId(), doc
 
 
 
