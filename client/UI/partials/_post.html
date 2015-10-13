@@ -22,6 +22,11 @@
 
             <h1>{{title}}</h1>
             <h4>{{tagline}}</h4>
+            {{#if linkToFeaturedImage}}
+                <figure>
+                   <img src="{{linkToFeaturedImage}}" class="img-responsive" alt="blog" />
+                </figure>
+            {{/if}}
 
             <!-- carousel -->
             <!-- transitionStyle: fade, backSlide, goDown, fadeUp,  -->

@@ -40,17 +40,19 @@ Template._newPost.events
     p.body = $('#body').val()
     p.mainCategory = $('#category').val()
     p.slug = $('#slug').val()
+    p.linkToFeaturedImage = $('#linkToFeaturedImage').val()
 
     # TODO: add validation notifications
     return if (p.title.trim() is '') or (p.body.trim() is '')
 
     if p.isPersistent()
       p.updatedAt = new Date
+      p.updatedBy = Meteor.userId()
       p.save()
       id = p._id
     else
       p.createdAt = new Date
-      p.ownerId = Meteor.userId()
+      p.createdBy = Meteor.userId()
       id = Posts.insert p
 
     #p.createdDateString = $('#createdDate').val()

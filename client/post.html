@@ -50,11 +50,13 @@
             <h6>{{tagline}}</h6>
 
             <!-- image -->
+            {{#if linkToFeaturedImage}}
             <figure>
-                <a href="blog-single.html">
-                    <img src="assets/images/demo/conference.jpg" class="img-responsive" alt="blog" />
+                <a href="{{pathFor 'showPostPermalink'}}">
+                    <img src="{{linkToFeaturedImage}}" class="img-responsive" alt="blog" />
                 </a>
             </figure>
+            {{/if}}
 
             <!-- blog short preview -->
             <p>
