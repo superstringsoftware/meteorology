@@ -4,19 +4,7 @@
     <!-- article - image -->
     <div class="prev-article row">
         <div class="blog-prev-date col-md-3 col-sm-3">
-								<span class="date">
-                                    {{createdAt.getDate}}
-									<small>{{shortMonthName createdAt.getMonth}} {{createdAt.getFullYear}}</small>
-								</span>
-								<span class="info hidden-xs">
-									<span class="block"><i class="fa fa-user"></i> BY <a href="blog-author.html">ADMIN</a></span>
-									<span class="block"><i class="fa fa-folder-open-o"></i> POSTED IN <a href="blog.html">{{mainCategory.toUpperCase}}</a></span>
-									<span class="block"><i class="fa fa-comments"></i> WITH <a href="blog-single.html#comments">3 COMMENTS</a></span>
-									<span class="block"><i class="fa fa-link"></i> <a href="blog-single.html">PERMALINK</a></span>
-                                    {{#if canEdit this}}
-                                    <span class="block"><i class="fa fa-keyboard-o"></i> <a href="/admin/editPost/{{_id}}">EDIT</a></span>
-                                    {{/if}}
-								</span>
+            {{> _postMeta}}
         </div>
 
         <div class="col-md-9 col-sm-9">
