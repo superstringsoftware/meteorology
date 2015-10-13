@@ -1,28 +1,3 @@
-<template name="showPost">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1 post">
-                {{> _post }}
-                {{>disqus}}
-            </div>
-        </div>
-    </div>
-
-</template>
-
-
-<template name="newPost">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                {{> _newPost }}
-            </div>
-        </div>
-    </div>
-</template>
-
-
-
 <template name="posts">
 
 {{#each this}}
@@ -47,7 +22,7 @@
         <div class="col-md-9 col-sm-9">
 
             <h2 class="article-title"><a href="{{pathFor 'showPostPermalink'}}">{{title}}</a></h2>
-            <h6>{{tagline}}</h6>
+
 
             <!-- image -->
             {{#if linkToFeaturedImage}}
@@ -57,14 +32,16 @@
                 </a>
             </figure>
             {{/if}}
+            <h5>{{tagline}}</h5>
 
             <!-- blog short preview -->
+            <!--
             <p>
                 {{body}}
-            </p>
+            </p> -->
 
             <!-- read more button -->
-            <div class="text-right">
+            <div class="text-left">
                 <a href="{{pathFor 'showPostPermalink'}}" class="read-more btn btn-xs"><i class="fa fa-sign-out"></i> READ MORE</a>
             </div>
 
