@@ -40,7 +40,7 @@ Template._newPost.events
     p.body = $('#body').val()
     p.mainCategory = $('#category').val()
     p.slug = $('#slug').val()
-    p.linkToFeaturedImage = $('#linkToFeaturedImage').val()
+    #p.linkToFeaturedImage = $('#linkToFeaturedImage').val()
 
     # TODO: add validation notifications
     return if (p.title.trim() is '') or (p.body.trim() is '')
@@ -54,6 +54,21 @@ Template._newPost.events
       p.createdAt = new Date
       p.createdBy = Meteor.userId()
       id = Posts.insert p
+
+    ###
+    file = $('#featuredImageFile')[0].files[0]
+    if file?
+      #console.log file
+      fr = new FileReader
+      fr.onloadend = ->
+        img = new Uint8Array(fr.result)
+        p.featuredImage = img
+        p.save()
+        #console.log fr.result
+        #console.log t
+      #fr.readAsBinaryString file
+      fr.readAsArrayBuffer file
+    ###
 
     #p.createdDateString = $('#createdDate').val()
     #console.log p

@@ -26,6 +26,7 @@ Posts.meteorCollection.allow
   remove: allowRemove
 
 
+#Observatory.automagical.logCollections()
 if Meteor.isClient
   #Observatory.subscribe(50)
   #Observatory.logMeteor()
@@ -35,8 +36,9 @@ if Meteor.isClient
     notFoundTemplate: "notFound"
     loadingTemplate: "loading"
 
+
+  Observatory.automagical.logSubscriptions()
   #Observatory.logCollection()
-  Observatory.logMeteor()
   #Observatory.logTemplates()
 
   #CommonController.subscribe 'allPosts'

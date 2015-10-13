@@ -13,7 +13,11 @@ class @TypedCollection
   # checking that doc is of correct type then inserting only data
   insert: (doc)->
     check doc, @dataType
-    @meteorCollection.insert doc.__getData()
+    doc._id = @meteorCollection.insert doc.__getData()
+    # converting the doc that we were inserting into persistent
+    # FIXME: check if it was already persistent???
+    doc._collection = @
+    doc._id
 
   remove: (selector, callback)->
     @meteorCollection.remove selector, callback

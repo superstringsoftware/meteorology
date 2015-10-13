@@ -23,4 +23,5 @@ class @Post extends DataType
   @typedProperties ['categories','tags'], [String], true #reactive
   @typedProperty 'published', Boolean
   @typedProperty 'linkToFeaturedImage', String
+  @typedProperty 'featuredImage', Uint8Array
   #@typedProperty 'author', String
