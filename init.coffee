@@ -26,7 +26,9 @@ Posts.meteorCollection.allow
   remove: allowRemove
 
 
-#Observatory.automagical.logCollections()
+Observatory.automagical.logCollections()
+#Observatory.automagical.logMongoConnection()
+
 if Meteor.isClient
   #Observatory.subscribe(50)
   #Observatory.logMeteor()
