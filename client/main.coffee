@@ -13,5 +13,3 @@ Template.registerHelper "shortMonthName", (num)->
 
 Template.registerHelper "equals", (a,b)-> a is b
 
-
-Meteor.startup -> Core()
