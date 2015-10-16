@@ -37,6 +37,11 @@ Router.route '/post/:_id',
   data: -> LastPosts.findOne _id: @params._id
 
 
+Router.route '/bootstrap',
+  template: 'bootstrap_test'
+  layoutTemplate: 'dumb_layout'
+
+
 ###
 Router.route 'posts', path: '/'
 Router.route "showPost",
