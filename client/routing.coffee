@@ -1,6 +1,6 @@
 Router.route '/',
   name: 'main'
-  waitOn: -> LastPosts.subscription
+  #waitOn: -> LastPosts.subscription
   data: -> LastPosts.findOne {}, sort: createdAt: -1
   layoutTemplate: 'mainLayout'
 
