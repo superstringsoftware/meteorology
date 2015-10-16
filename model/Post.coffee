@@ -18,8 +18,8 @@ class @Post extends DataType
   constructor: (post)->
 
   @typedProperties ['title','tagline','credit','link','slug','body','mainCategory', 'createdBy', 'updatedBy'], String
-  @typedProperties ['createdAt','updatedAt'], Date
-  @typedProperties ['likeCount','viewCount'], Number
+  @typedProperties ['createdAt','updatedAt', 'publishedAt'], Date
+  @typedProperties ['upVotes','downVotes','viewCount'], Number
   @typedProperties ['categories','tags'], [String], true #reactive
   @typedProperty 'published', Boolean
   @typedProperty 'linkToFeaturedImage', String

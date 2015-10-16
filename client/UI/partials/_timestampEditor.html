@@ -1,0 +1,25 @@
+<template name="_timestampEditor">
+    <div class="form-inline">
+        <div class="form-group">
+            <input class="form-control" type="text" id="input_year" value="{{getFullYear}}">
+        </div>
+        <div class="form-group">
+            <select id="input_month" value="{{getMonth}}">
+                {{#each shortMonthNames}}
+                    {{#if equals @index ../getMonth}}
+                        <option value="{{@index}}" selected>{{this}}</option>
+                    {{else}}
+                        <option value="{{@index}}">{{this}}</option>
+                    {{/if}}
+                {{/each}}
+            </select>
+
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" id="input_date" value="{{getDate}}">
+        </div>
+        <input type="button" value="update" id="btnUpdateTimestamp">
+
+
+    </div>
+</template>
