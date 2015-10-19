@@ -36,7 +36,7 @@ Router.route '/admin/editPost/:_id',
 
 Router.route '/post/:_id',
   name: 'showPostPermalink'
-  template: '_featuredPost' #'_post'
+  template: '_post'
   layoutTemplate: 'blogLayout'
   data: -> LastPosts.findOne _id: @params._id
 

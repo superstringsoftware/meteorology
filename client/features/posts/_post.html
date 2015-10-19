@@ -1,18 +1,10 @@
 <!-- single post -->
 <template name="_post">
-    <div class="prev-article row">
-
-        <div class="blog-prev-date col-md-3 col-sm-3">
-            {{> _postMeta}}
-        </div>
-
-        <div class="col-md-9 col-sm-9">
-
             <h1>{{title}}</h1>
             <h4>{{tagline}}</h4>
             {{#if linkToFeaturedImage}}
                 <figure>
-                   <img src="{{linkToFeaturedImage}}" class="img-responsive" alt="blog" />
+                    <img src="{{linkToFeaturedImage}}" class="img-responsive" alt="blog" style="float: right; margin: 8px;" />
                 </figure>
 
             {{/if}}
@@ -50,25 +42,30 @@
 
 
             <!-- SOCIAL -->
+    <!--
             <p class="socials">
-                <a href="#" class="rounded-icon social fa fa-facebook"><!-- facebook --></a>
-                <a href="#" class="rounded-icon social fa fa-twitter"><!-- twitter --></a>
-                <a href="#" class="rounded-icon social fa fa-google-plus"><!-- google plus --></a>
-                <a href="#" class="rounded-icon social fa fa-pinterest"><!-- pinterest --></a>
-                <a href="#" class="rounded-icon social fa fa-linkedin"><!-- linkedin --></a>
+                <a href="#" class="rounded-icon social fa fa-facebook"></a>
+                <a href="#" class="rounded-icon social fa fa-twitter"></a>
+                <a href="#" class="rounded-icon social fa fa-google-plus"></a>
+                <a href="#" class="rounded-icon social fa fa-linkedin"></a>
             </p>
+    -->
 
             <!-- TAGS -->
-            <p class="fsize16"> Tags:
+    <hr/>
+            <p>{{> _postMeta}}</p>
+            <p class="fsize16">
                 {{#each tags}}
                 <a class="tag label label-default light" href="#"><i class="fa fa-tags"></i> {{this}}</a>
                 {{/each}}
             </p>
 
-        </div>
 
+    <div class="row">
+        &nbsp;<br/>
+        &nbsp;<br/>
+        &nbsp;<br/>
     </div>
-
     <div id="comments">
         {{>disqus}}
     </div>

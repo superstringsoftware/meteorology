@@ -1,46 +1,29 @@
 <template name="posts">
-    {{> _about}}
-
     {{#with lastPost}}
         {{> _featuredPost }}
+        <div class="text-left">
+            <a href="{{pathFor 'showPostPermalink'}}" class="read-more btn btn-xs btn-info"><i class="fa fa-sign-out"></i> COMMENT</a>
+        </div>
     {{/with}}
 
-{{#each this}}
+{{#each remainingPosts}}
     <!-- article - image -->
-    <div class="prev-article row">
-        <div class="blog-prev-date col-md-3 col-sm-3">
-            {{> _postMeta}}
-        </div>
-
-        <div class="col-md-9 col-sm-9">
-
             <h2 class="article-title"><a href="{{pathFor 'showPostPermalink'}}">{{title}}</a></h2>
+            <p>
+                <span class="date">
+                    {{createdAt.getDate}}
+                    <small>{{shortMonthName createdAt.getMonth }} {{createdAt.getFullYear}}</small>
+                </span>
+                <a href="{{pathFor 'showPostPermalink'}}" class="read-more btn btn-xs btn-default"><i class="fa fa-sign-out"></i> READ MORE</a>
 
-
-            <!-- image -->
-            {{#if linkToFeaturedImage}}
-            <figure>
-                <a href="{{pathFor 'showPostPermalink'}}">
-                    <img src="{{linkToFeaturedImage}}" class="img-responsive" alt="blog" />
-                </a>
-            </figure>
-            {{/if}}
+                &nbsp;
+                {{#each tags}}
+                    <a class="tag" href="#"><i class="fa fa-tags"></i> {{this}}</a>
+                {{/each}}
+            </p>
             <h5>{{tagline}}</h5>
 
-            <!-- blog short preview -->
-            <!--
-            <p>
-                {{body}}
-            </p> -->
 
-            <!-- read more button -->
-            <div class="text-left">
-                <a href="{{pathFor 'showPostPermalink'}}" class="read-more btn btn-xs"><i class="fa fa-sign-out"></i> READ MORE</a>
-            </div>
-
-        </div>
-    </div>
-    <!-- /article - image -->
 
 {{/each}}
 </template>
