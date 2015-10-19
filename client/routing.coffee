@@ -1,3 +1,5 @@
+Router.route '/layout1', template: 'layout1'
+
 Router.route '/',
   name: 'main'
   #waitOn: -> LastPosts.subscription
