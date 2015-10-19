@@ -1,5 +1,29 @@
 <template name="blogLayout">
-    {{> yield }}
+    {{> _topNavigation}}
+
+    <div class="container theme-showcase" role="main">
+        <div class="row">
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-10">
+                {{> yield }}
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
     <!-- /FOOTER -->
+    <footer class="blog-footer" style="background-color: #002425;">
+        <hr/>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p>
+                    &copy; superstringsoftware ventures, 2012-2015
+                </p>
+
+            </div>
+        </div>
+    </footer>
+
     {{>google}}
 </template>

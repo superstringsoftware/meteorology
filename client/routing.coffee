@@ -2,9 +2,11 @@ Router.route '/layout1', template: 'layout1'
 
 Router.route '/',
   name: 'main'
+  template: 'posts'
   #waitOn: -> LastPosts.subscription
-  data: -> LastPosts.findOne {}, sort: createdAt: -1
-  layoutTemplate: 'mainLayout'
+  data: -> LastPosts.find({}, sort: createdAt: -1).fetch()
+  layoutTemplate: 'blogLayout'
+  #layoutTemplate: 'mainLayout'
 
 Router.route '/blog',
   name: 'blog'
@@ -34,7 +36,7 @@ Router.route '/admin/editPost/:_id',
 
 Router.route '/post/:_id',
   name: 'showPostPermalink'
-  template: '_post'
+  template: '_featuredPost' #'_post'
   layoutTemplate: 'blogLayout'
   data: -> LastPosts.findOne _id: @params._id
 

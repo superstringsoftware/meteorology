@@ -1,7 +1,7 @@
 tl = tb = Observatory.getToolbox()
 
 # publishing last posts to the lastPosts collection on the client
-Posts.publishObserve "lastPosts", {}, sort: createdAt: -1
+Posts.publishObserve "lastPosts", {}, {sort: {createdAt: -1}, limit: 5}
 
 au = Meteor.users.find({"securityProfile.globalRole": "admin"}).count()
 #Observatory.meteorServer.publish -> true

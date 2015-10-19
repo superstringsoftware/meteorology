@@ -1,0 +1,47 @@
+<template name="_featuredPost">
+
+    <h1>{{title}}</h1>
+    <h4>{{tagline}}</h4>
+    <p>
+        <span class="date label label-primary">
+            {{createdAt.getDate}}
+            <small>{{shortMonthName createdAt.getMonth }} {{createdAt.getFullYear}}</small>
+        </span>
+        &nbsp;
+        {{#each tags}}
+            <a class="tag" href="#"><i class="fa fa-tags"></i> {{this}}</a>
+        {{/each}}
+    </p>
+
+
+    {{#if linkToFeaturedImage}}
+        <figure>
+            <img src="{{linkToFeaturedImage}}" class="img-responsive" alt="blog" style="float: right; margin: 8px;" />
+        </figure>
+
+    {{/if}}
+
+    <!-- article content -->
+    <article>
+
+        {{#markdown}}
+            {{{body}}}
+        {{/markdown}}
+
+    </article>
+
+
+    <!-- SOCIAL -->
+    <p class="socials">
+        <a href="#" class="rounded-icon social fa fa-facebook"><!-- facebook --></a>
+        <a href="#" class="rounded-icon social fa fa-twitter"><!-- twitter --></a>
+        <a href="#" class="rounded-icon social fa fa-google-plus"><!-- google plus --></a>
+        <a href="#" class="rounded-icon social fa fa-pinterest"><!-- pinterest --></a>
+        <a href="#" class="rounded-icon social fa fa-linkedin"><!-- linkedin --></a>
+    </p>
+
+
+
+
+
+</template>

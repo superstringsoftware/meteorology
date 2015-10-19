@@ -1,4 +1,9 @@
 <template name="posts">
+    {{> _about}}
+
+    {{#with lastPost}}
+        {{> _featuredPost }}
+    {{/with}}
 
 {{#each this}}
     <!-- article - image -->
