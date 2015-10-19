@@ -2,10 +2,21 @@
     {{#with lastPost}}
         {{> _featuredPost }}
         <div class="text-left">
-            <a href="{{pathFor 'showPostPermalink'}}" class="read-more btn btn-xs btn-info"><i class="fa fa-sign-out"></i> COMMENT</a>
+            <a href="{{pathFor 'showPostPermalink'}}" class="read-more btn btn-xs btn-default"><i class="fa fa-sign-out"></i> COMMENT</a>
+            {{#if canEdit this}}
+                <span class="block"><i class="fa fa-keyboard-o"></i> <a href="/admin/editPost/{{_id}}">EDIT</a></span>
+            {{/if}}
         </div>
     {{/with}}
 
+    <div class="row">
+        &nbsp;<br>
+        &nbsp;<br>
+        &nbsp;<br>
+    </div>
+    <hr/>
+        <h3>Previous Posts</h3>
+    <hr/>
 {{#each remainingPosts}}
     <!-- article - image -->
             <h2 class="article-title"><a href="{{pathFor 'showPostPermalink'}}">{{title}}</a></h2>
@@ -20,6 +31,9 @@
                 {{#each tags}}
                     <a class="tag" href="#"><i class="fa fa-tags"></i> {{this}}</a>
                 {{/each}}
+                {{#if canEdit this}}
+                    <span class="block"><i class="fa fa-keyboard-o"></i> <a href="/admin/editPost/{{_id}}">EDIT</a></span>
+                {{/if}}
             </p>
             <h5>{{tagline}}</h5>
 

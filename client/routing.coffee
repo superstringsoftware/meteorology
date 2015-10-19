@@ -35,10 +35,17 @@ Router.route '/admin/editPost/:_id',
 
 
 Router.route '/post/:_id',
+  name: 'showPost'
+  template: '_post'
+  layoutTemplate: 'blogLayout'
+  data: -> Posts.findOne _id: @params._id
+
+Router.route '/posts/:__slug',
   name: 'showPostPermalink'
   template: '_post'
   layoutTemplate: 'blogLayout'
-  data: -> LastPosts.findOne _id: @params._id
+  data: -> Posts.findOne slug: @params.__slug
+
 
 
 Router.route '/bootstrap',
