@@ -5,7 +5,7 @@ Posts.publishObserve "lastPosts", {}, {sort: {createdAt: -1}, limit: 5}
 
 au = Meteor.users.find({"securityProfile.globalRole": "admin"}).count()
 #Observatory.meteorServer.publish -> true
-Observatory.emitters.Monitor.startMonitor(300000)
+#Observatory.emitters.Monitor.startMonitor(300000)
 
 tl.info "Found " + au + " admin users"
 # accounts setup for initial admin user
