@@ -4,7 +4,7 @@ Router.route '/',
   name: 'main'
   template: 'posts'
   #waitOn: -> LastPosts.subscription
-  data: -> LastPosts.find({}, sort: createdAt: -1).fetch()
+  #data: -> LastPosts.find({}, sort: createdAt: -1).fetch()
   layoutTemplate: 'blogLayout'
   #layoutTemplate: 'mainLayout'
 
@@ -44,7 +44,7 @@ Router.route '/posts/:__slug',
   name: 'showPostPermalink'
   template: '_post'
   layoutTemplate: 'blogLayout'
-  data: -> Posts.findOne slug: @params.__slug
+  data: -> LastPosts.findOne slug: @params.__slug ? Posts.findOne slug: @params.__slug
 
 
 

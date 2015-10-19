@@ -1,6 +1,6 @@
 tl = tb = Observatory.getToolbox()
 
-@Posts = new TypedCollection 'posts', Post, true
+@Posts = new TypedCollection 'posts', Post
 
 # security methods - probably should go to a separate security class eventually
 @allowInsert = (uid)->

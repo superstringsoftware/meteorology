@@ -4,6 +4,7 @@ tb = Observatory.getToolbox()
 # @LastPosts - only last posts, available universally
 @LastPosts = new TypedCollection 'lastPosts', Post
 LastPosts.subscribe 'lastPosts'
+Posts.subscribeFind()
 
 Template.registerHelper "shortMonthNames",->
   ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC']

@@ -4,3 +4,10 @@ Router.route '/posts/:__slug',
   layoutTemplate: 'blogLayout'
   data: -> Posts.findOne slug: @params.__slug
 , where: 'server'
+
+Router.route '/',
+  name: 'main'
+  template: 'posts'
+  data: -> serverPost: Posts.findOne({}, sort: createdAt: -1)
+  layoutTemplate: 'blogLayout'
+, where: 'server'
