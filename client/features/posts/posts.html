@@ -25,8 +25,6 @@
                     {{createdAt.getDate}}
                     <small>{{shortMonthName createdAt.getMonth }} {{createdAt.getFullYear}}</small>
                 </span>
-                <a href="{{pathFor 'showPostPermalink'}}" class="read-more btn btn-xs btn-default"><i class="fa fa-sign-out"></i> READ MORE</a>
-
                 &nbsp;
                 {{#each tags}}
                     <a class="tag" href="#"><i class="fa fa-tags"></i> {{this}}</a>
