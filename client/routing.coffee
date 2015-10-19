@@ -44,7 +44,7 @@ Router.route '/posts/:__slug',
   name: 'showPostPermalink'
   template: '_post'
   layoutTemplate: 'blogLayout'
-  data: -> LastPosts.findOne slug: @params.__slug ? Posts.findOne slug: @params.__slug
+  data: -> Posts.findOne slug: @params.__slug
 
 
 

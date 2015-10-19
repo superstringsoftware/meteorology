@@ -10,13 +10,13 @@ tl = tb = Observatory.getToolbox()
   ret
 @allowUpdate = (uid, doc)->
   role = Meteor.users.findOne(uid)?.securityProfile?.globalRole
-  ret = if (role is 'admin') or (uid is doc.ownerId) then true else false
-  msg = "Returning " + ret + " from allowUpdate for " + uid + " and owner " + doc.ownerId
+  ret = if (role is 'admin') or (uid is doc?.ownerId) then true else false
+  msg = "Returning " + ret + " from allowUpdate for " + uid + " and owner " + doc?.ownerId
   tb.debug msg
   ret
 @allowRemove = (uid, doc)->
   ret = allowUpdate uid, doc
-  msg = "Returning " + ret + " from allowRemove for " + uid + " and owner " + doc.ownerId
+  msg = "Returning " + ret + " from allowRemove for " + uid + " and owner " + doc?.ownerId
   tb.debug msg
   ret
 
