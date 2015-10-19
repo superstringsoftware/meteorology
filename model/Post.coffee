@@ -17,7 +17,7 @@ createdAt: Date
 class @Post extends DataType
   constructor: (post)->
 
-  @typedProperties ['title','tagline','credit','link','slug','body','mainCategory', 'createdBy', 'updatedBy', 'permalink'], String
+  @typedProperties ['title','tagline','credit','link','slug','body','mainCategory', 'createdBy', 'updatedBy', 'ownerId', 'permalink'], String
   @typedProperties ['createdAt','updatedAt', 'publishedAt'], Date
   @typedProperties ['upVotes','downVotes','viewCount'], Number
   @typedProperties ['categories','tags'], [String], true #reactive

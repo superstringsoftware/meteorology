@@ -53,6 +53,7 @@ Template._newPost.events
     else
       p.createdAt = new Date
       p.createdBy = Meteor.userId()
+      p.ownerId = p.createdBy
       id = Posts.insert p
 
     ###
