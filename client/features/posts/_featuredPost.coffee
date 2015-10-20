@@ -27,4 +27,4 @@ Template._featuredPost.onRendered ->
   Tracker.autorun (c)->
     if LastPosts.subscription.ready()
       c.stop()
-      spinner.stop() 
+      spinner.stop()
